@@ -14,7 +14,7 @@ appControllers.controller('BoardsController', ['$scope', 'TrelloDataService', fu
 }]);
 
 appControllers.controller('QACardsController', ['$scope', 'TrelloDataService', function($scope, TrelloDataService) {
-	TrelloDataService.loadData($scope, 'boards/4fe9828c6b88d0c66f40ac32', {  });
+	TrelloDataService.loadData($scope, 'boards/4fe9828c6b88d0c66f40ac32/cards', {  });
 	$scope.model = TrelloDataService.model();
 	$scope.model.ready = false;
 }]);
