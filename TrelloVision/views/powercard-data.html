@@ -1,0 +1,141 @@
+<div ng-cloak ng-show="!model.ready" class="wait">
+	<p>Loading Trello data, please wait...</p>
+</div>
+
+
+<div class="row" ng-show="model.ready">
+	
+	<div class="columns">
+		<p class="smallText" style="margin-bottom: 0;">
+			<a href="#/cardtable/board/{{model.data.board.id}}">
+				{{model.data.board.name}}
+			</a> > 
+			<a href="#/cardtable/board/{{model.data.board.id}}?fl={{model.listFilter}}">
+				{{model.data.list.name}}
+			</a>
+		</p>
+		<h3>
+			{{model.data.name}}
+		</h3>
+		
+		<div>
+			<span ng-show="model.data.badges.comments" class="tagBox">
+				{{model.data.badges.comments}} comments
+			</span><!--
+    		
+    		--><span ng-show="model.data.badges.subscribed" class="tagBox">
+				Subscribed
+			</span><!--
+    		
+    		--><span ng-show="model.data.badges.due != null" class="tagBox" 
+			      title="Due: {{getDueFull(model.data.badges.due)}}">
+				Due: {{getDueShort(model.data.badges.due)}}<br/>
+			</span><!--
+    		
+    		--><span ng-show="model.data.badges.votes" class="tagBox">
+				{{model.data.badges.comments}} votes
+
+				<span ng-show="model.data.badges.viewingMemberVoted">
+					(You voted)
+				</span>
+			</span><!--
+    		
+    		--><a ng-repeat="mem in model.data.members" class="tagBox"
+    				href="http://trello.com/{{mem.username}}" target="_blank"
+    				title="{{mem.fullName}} ({{mem.username}})">
+				<strong>
+					{{mem.initials}}
+				</strong>
+			</a>
+		</div>
+		
+		<div ng-show="model.data.labels.length > 0">
+			<span ng-repeat="lbl in model.data.labels" class="tagBox"
+					style="color:{{getLabelTextColor(lbl.color)}}; font-weight: bold;
+					background-color:{{lbl.color}}; border:1px solid #555;">
+				{{lbl.name}}
+			</span>
+		</div>
+		
+		<div ng-show="model.hashtags.length > 0">
+			<a ng-repeat="tag in model.hashtags" class="tagBox"
+					href="#/cardtable/board/{{model.data.board.id}}?ft={{tag}}">
+				#{{tag}}
+			</a>
+		</div>
+		
+		<hr/>
+
+		<p ng-show="model.data.desc.length > 0" style="margin-top: 10px;"
+			ng-bind-html-unsafe="descToHtml(model.data.desc, 'trelloTag')">
+		</p>
+		
+		<p>
+			<a href="{{model.data.url}}">View this card on Trello ></a>
+		</p>
+	</div>
+
+</div>
+
+
+<div class="row" ng-show="model.ready && model.data.checklists.length > 0">
+	<hr/>
+	
+	<div class="columns">
+		<div ng-repeat="check in model.data.checklists">
+			<h5 style="display:inline-block;">
+				{{check.name}}
+			</h5>
+			
+			<p style="display:inline-block; margin-bottom:5px;">
+				({{getChecklistProg(check,0)}}, {{getChecklistProg(check,1)}}%)
+			</p>
+			
+			<div style="background-color:#aaa; width:100%; height:5px; margin-bottom:10px;">
+				<div style="background-color:#555; width:{{getChecklistProg(check,1)}}%; height:100%;">
+				</div>
+			</div>
+			
+			<table style="width: 100%;">
+				<tr ng-repeat="item in check.checkItems">
+					<td style="width: 20px; text-align: center;">
+						<span ng-show="item.state == 'complete'" class="ui-icon ui-icon-check"></span>
+						<span ng-show="item.state != 'complete'" style='color:#888'>--</span>
+					</td>
+					<td>
+						{{item.name}}
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	
+</div>
+
+
+<div class="row" ng-show="model.ready && model.actions.length > 0">
+	<hr/>
+	
+	<div class="columns">
+		<h5>
+			Comments
+		</h5>
+		
+		<table style="width: 100%;">
+			<tr ng-repeat="action in model.actions">
+				<td style="vertical-align: top; font-size: 1.0em; width: 20%;">
+					<a href="{{action.memberCreator.username}}">
+						<strong>{{action.memberCreator.fullName}}</strong>
+					</a><br/>
+					<span style="color:#888; font-size:0.8em;">
+						{{getActionDate(action.date)}}
+					</span>
+				</td>
+				<td ng-bind-html-unsafe="descToHtml(action.data.text, 'trelloTag')"
+					style="vertical-align: top; font-size: 1.0em;">
+				</td>
+			</tr>
+		</table>
+	</div>
+	
+</div>
