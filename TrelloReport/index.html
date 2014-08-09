@@ -14,13 +14,21 @@
 	</head>
 <body>
 
+<div ng-controller="BoardsController">
 
+	<ul>
+		<li ng-repeat="board in model.data.boards">
+		List item: {{board.name}}
+		</li>
+	</ul>
+
+</div>
 
 <div ng-controller="QACardsController">
 Inside div
 	<ul>
-		<li ng-repeat="card in model.data.cards">
-		List item: {{card.name}}
+		<li ng-repeat="board in model.data">
+		List item: {{board.name}}
 		</li>
 	</ul>
 
