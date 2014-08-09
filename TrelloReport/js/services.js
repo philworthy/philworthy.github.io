@@ -1,64 +1,13 @@
 
-var TrelloVisionApp = angular
-	.module('TrelloVision', [])
-	.config(['$routeProvider', buildRoutes]);
 
-var TrelloVisionModules = [
-	{ name: 'Overview', uri: '/overview' },
-	{ name: 'CardTable', uri: '/cardtable' },
-	{ name: 'PowerCard', uri: '/powercard' }
-];
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*----------------------------------------------------------------------------------------------------*/
+var appServices = angular.module('appServices', ['ngResource']);
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*----------------------------------------------------------------------------------------------------*/
-function buildRoutes($routeProvider) {
-	$routeProvider
-		.when('/', {
-			templateUrl: 'views/home.html',
-			controller: HomeCtrl
-		})
-		.when('/overview', {
-			templateUrl: 'views/overview.html',
-			controller: OverviewCtrl
-		})
-		.when('/cardtable', {
-			templateUrl: 'views/cardtable.html',
-			controller: CardTableCtrl
-		})
-		.when('/cardtable/board', {
-			templateUrl: 'views/cardtable.html',
-			controller: CardTableCtrl
-		})
-		/*.when('/cardtable/test', {
-			templateUrl: 'views/cardtable-board.html', 
-			controller: CardTableTestCtrl
-		})*/
-		.when('/cardtable/board/:boardId/csv', {
-			templateUrl: 'views/cardtable-csv.html',
-			controller: CardTableCsvCtrl
-		})
-		.when('/cardtable/board/:boardId', {
-			templateUrl: 'views/cardtable-board.html',
-			controller: CardTableCtrl
-		})
-		.when('/powercard', {
-			templateUrl: 'views/powercard.html',
-			controller: PowerCardCtrl
-		})
-		.when('/powercard/:cardId', {
-			templateUrl: 'views/powercard-data.html',
-			controller: PowerCardCtrl
-		})
-		.otherwise({
-			redirectTo: '/'
-		});
-}
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*----------------------------------------------------------------------------------------------------*/
-TrelloVisionApp.factory('TrelloDataService', function() {
+appServices.factory('TrelloDataService', function() {
 	var svc = { };
 
 	var model = {
@@ -133,3 +82,21 @@ TrelloVisionApp.factory('TrelloDataService', function() {
 
 	return svc;
 });
+/*----------------------------------------------------------------------------------------------------*/
+function trelloAuth(onSuccess, onError) {
+	var opt = {
+		type: "popup",
+		name: "TrelloReport",
+		scope: { read: true },
+		success: onSuccess,
+		error: onError
+	};
+
+	Trello.authorize(opt);
+}
+
+/*----------------------------------------------------------------------------------------------------*/
+function isTrelloAuthRequired(err) {
+	return (err.responseText.indexOf('invalid token') == 0);
+}
+
