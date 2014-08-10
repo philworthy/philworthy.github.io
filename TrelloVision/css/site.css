@@ -1,0 +1,103 @@
+
+.smallText {
+	font-size: 0.8em;
+}
+
+.smallLabel {
+	font-size: 0.7em;
+	text-transform: uppercase;
+	color: #888;
+	margin-bottom: 0;
+}
+
+ul, ol {
+	list-style-position: outside;
+	margin-left: 0;
+	padding-left: 25px;
+}
+
+.swatch16 {
+	width: 16px;
+	height: 16px;
+	margin-right: 2px;
+	background-color: black;
+	display: inline-block;
+}
+
+.tagBox {
+	font-size: 0.8em;
+	margin: 0 3px 3px 0;
+	padding: 3px 6px 5px 6px;
+	background-color: #eee;
+	border: solid 1px #ddd;
+	display: inline-block;
+}
+
+.trelloTag {}
+
+table thead tr th  {
+    padding: 0.6em 0.4em;
+}
+
+table tr td {
+    padding: 0.4em;
+}
+
+table tr td p:last-child {
+	margin-bottom: 0;
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+	display: none;
+}
+
+.footer {
+	text-align: center;
+	font-size: 0.8em;
+	color: #bbb;
+}
+
+.footer a {
+	color: #888;
+}
+
+.footer a:hover {
+	color: #333;
+}
+
+.wait {
+	background-color: #ffeeaa;
+	padding: 5px 10px;
+}
+
+.wait p {
+	font-style: italic;
+	padding: 0;
+	margin: 0;
+}
+
+code {
+	font-family: Lucida Console, Consolas, Monaco, monospace;
+	font-weight: normal;
+	font-size: 0.9em;
+	color: #333;
+	margin: 0;
+	padding: 0 5px 0 5px;
+	background-color: #f8f8f8;
+	border: solid 1px #ddd;
+}
+
+pre {
+	font-size: 1.2em;
+	margin: 0 0 15px 0;
+	padding: 2px 7px;
+	background-color: #f8f8f8;
+	border: solid 1px #ddd;
+}
+
+pre code {
+	font-size: 1.0em;
+	padding: 0;
+	background-color: inherit;
+	border: 0;
+}
