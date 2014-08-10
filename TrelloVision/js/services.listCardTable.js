@@ -118,29 +118,16 @@ function buildListCardTable(scope) {
 
 	console.log(">>>build list:"+scope.model.data.toString());
 
-	var board = scope.model.data;
+	var cards = scope.model.data;
 
 	var table = {
-		board: board,
-		org: board.organization,
-		members: board.members,
-		labelColors: ['green', 'yellow', 'orange', 'red', 'purple', 'blue'],
-		labelMap: board.labelNames,
-		listIds: [],
-		listMap: {},
 		cards: []
 	};
 
 	scope.model.table = table;
 
-	for ( var li in board.lists ) {
-		var list = board.lists[li];
-		table.listIds.push(list.id);
-		table.listMap[list.id] = list;
-	}
-
-	for ( var ci in board.cards ) {
-		var card = board.cards[ci];
+	for ( var ci in cards ) {
+		var card = cards[ci];
 		var c = {};
 		table.cards.push(c);
 
