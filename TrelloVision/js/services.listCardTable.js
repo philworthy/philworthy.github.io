@@ -38,7 +38,7 @@ TrelloVisionApp.factory('ListCardTableService', function() {
 		});*/
 
 		TrelloDataService.loadData(scope, 'lists/53e37d06f2ef915cb1407bbd/cards', params, function(scope) {
-			buildQACardTable(scope);
+			buildListrCardTable(scope);
 
 			if ( afterBuildCardTable ) {
 				afterBuildCardTable(scope);
