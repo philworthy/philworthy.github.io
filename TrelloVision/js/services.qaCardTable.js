@@ -14,7 +14,19 @@ TrelloVisionApp.factory('CardTableService', function() {
 			organization: 'true'
 		};
 
-		TrelloDataService.loadData(scope, 'boards/4fe9828c6b88d0c66f40ac32', params, function(scope) {
+		var requests = [
+			{apiCommand: "lists/53c92e8da8dfc5f54adbd950",
+			dataSets: params,
+			propertyName: "API:ReadyForQA"},
+			{apiCommand: "lists/53e37d06f2ef915cb1407bbd",
+			dataSets: params,
+			propertyName: "API:InQA"},
+			{apiCommand: "lists/53e37d16740abf207bc80d1e",
+			dataSets: params,
+			propertyName: "API:ReadyForRelease"}
+		];
+
+		TrelloDataService.loadMultiData(scope, requests, function(scope) {
 			buildCardTable(scope);
 
 			if ( afterBuildCardTable ) {
