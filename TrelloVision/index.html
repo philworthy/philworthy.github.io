@@ -18,7 +18,7 @@
 	<link rel="stylesheet" href="css/theme.css">
 
 </head>
-<body ng-controller="LayoutCtrl" role="document" ng-cloak ng-show="model.ready">
+<body ng-controller="LayoutCtrl" role="document">
 
 	<!-- Fixed navbar -->
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -33,7 +33,7 @@
           <a class="navbar-brand" href="#">TrelloVision</a>
         </div>
         <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav" ng-repeat="mod in model.modules">
+          <ul class="nav navbar-nav" ng-repeat="mod in model.modules" ng-cloak ng-show="model.ready">
             <li><a href="#{{mod.uri}}">{{mod.name}}</a></li>
           </ul>
         </div><!--/.nav-collapse -->
