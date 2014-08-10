@@ -1,27 +1,27 @@
 <div ng-show="!model.ready" class="wait">
-	<p>Loading Trello data, please wait...</p>
+	<h1>Loading Trello data, please wait...</h1>
 </div>
 
 <div ng-cloak ng-show="model.ready">
 
 	<div >
 		<a href="{{model.data.url}}">{{model.data.fullName}}</a>
-		{{model.data.username}}
 	</div>
 	
 	<div>
-		My Boards
+		
+		<div>
+			<h3>My Boards</h3>
 
-		<ul>
-			<li ng-repeat="board in model.data.boards | filter:{idOrganization:'!'}">
-				<a href="#/cardtable/board/{{board.id}}" target="_self">{{board.name}}</a>
-			</li>
-		</ul>
+			<ul>
+				<li ng-repeat="board in model.data.boards | filter:{idOrganization:'!'}">
+					<a href="#/cardtable/board/{{board.id}}" target="_self">{{board.name}}</a>
+				</li>
+			</ul>
+		</div>
 
 		<div ng-repeat="org in model.data.organizations">
-			<h5>
-				{{org.displayName}}
-			</h5>
+			<h3>{{org.displayName}}</h3>
 
 			<ul>
 				<li ng-repeat="board in model.data.boards | filter:{idOrganization: org.id}">
