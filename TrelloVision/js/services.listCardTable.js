@@ -10,11 +10,11 @@ TrelloVisionApp.factory('ListCardTableService', function() {
 
 	svc.loadBoardData = function(TrelloDataService, scope, routeParams, afterBuildCardTable) {
 		var params = {
-			lists: 'open',
+			/*lists: 'open',
 			cards: 'visible',
 			card_checklists: 'all',
 			members: 'all',
-			organization: 'true'
+			organization: 'true'*/
 		};
 
 		/*var requests = [
