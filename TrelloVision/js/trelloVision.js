@@ -7,7 +7,7 @@ var HashTagPattern = /([\s">\[\{}])(#)([a-zA-Z][\w\-]*)/g;
 /*----------------------------------------------------------------------------------------------------*/
 function trelloAuth(onSuccess, onError) {
 	var opt = {
-		type: "popup",
+		type: "redirect",
 		name: "TrelloVision",
 		scope: { read: true },
 		success: onSuccess,
