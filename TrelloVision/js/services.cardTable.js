@@ -3,6 +3,9 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*----------------------------------------------------------------------------------------------------*/
 TrelloVisionApp.factory('CardTableService', function() {
+	
+	console.log("Card:"+scope.model.data);
+
 	var svc = {};
 
 	svc.loadBoardData = function(TrelloDataService, scope, routeParams, afterBuildCardTable) {
