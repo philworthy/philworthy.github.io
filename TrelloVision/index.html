@@ -37,23 +37,6 @@
         </div><!--/.nav-collapse -->
       </div>
     </div>
-	
-	<div>
-		Trello for <strong>Livestream</strong>
-		
-		<div ng-cloak ng-show="model.ready">
-			<select id="ModuleSelector">
-				<option value="#/">
-					Select a module...
-				</option>
-				<option value="#{{mod.uri}}" {{mod.selected}} ng-repeat="mod in model.modules">
-					{{mod.name}}
-				</option>
-			</select>
-		</div>
-
-		<hr />
-	</div>
 
 	<script type="text/javascript">
 		$("#ModuleSelector").change(function() {
@@ -61,8 +44,8 @@
 		});
 	</script>
 	
-	<div class="row" ng-cloak ng-show="model.ready">
-		<div class="large-12 columns">
+	<div class="container" ng-cloak ng-show="model.ready">
+		<div >
 			<div ng-view></div>
 		</div>
 	</div>
