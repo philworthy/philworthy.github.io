@@ -16,7 +16,7 @@ TrelloVisionApp.factory('ListCardTableService', function() {
 			card_checklists: 'all',
 			members: 'all',
 			organization: 'true'*/
-			actions: 'updateCard:idList',
+			//actions: 'updateCard:idList',
 			checklists: 'all',
 			members: 'true'
 		};
