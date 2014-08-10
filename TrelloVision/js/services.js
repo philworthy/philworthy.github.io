@@ -57,10 +57,12 @@ TrelloVisionApp.factory('TrelloDataService', function() {
 
 	svc.loadData = function(scope, apiCommand, dataSets, onDataSuccess) {
 		var onGetSuccess = function(data) {
+			console.log("on success");
 			model.data = data;
 			model.ready = true;
 
 			if ( onDataSuccess ) {
+				console.log("data success");
 				onDataSuccess(scope);
 			}
 
@@ -80,6 +82,7 @@ TrelloVisionApp.factory('TrelloDataService', function() {
 		};
 
 		var sendTrelloCmd = function() {
+			console.log("send "+apiCommand);
 			Trello.get(apiCommand, dataSets, onGetSuccess, onGetError);
 		};
 
