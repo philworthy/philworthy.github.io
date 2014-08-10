@@ -34,7 +34,7 @@ TrelloVisionApp.factory('QACardTableService', function() {
 			}
 		});*/
 
-		TrelloDataService.loadData(scope, 'lists/53e37d06f2ef915cb1407bbd', params, function(scope) {
+		TrelloDataService.loadData(scope, 'lists/53e37d06f2ef915cb1407bbd/cards', params, function(scope) {
 			buildQACardTable(scope);
 
 			if ( afterBuildCardTable ) {
