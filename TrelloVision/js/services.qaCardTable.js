@@ -2,7 +2,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*----------------------------------------------------------------------------------------------------*/
-TrelloVisionApp.factory('CardTableService', function() {
+TrelloVisionApp.factory('QACardTableService', function() {
 	var svc = {};
 
 	svc.loadBoardData = function(TrelloDataService, scope, routeParams, afterBuildCardTable) {
@@ -14,7 +14,7 @@ TrelloVisionApp.factory('CardTableService', function() {
 			organization: 'true'
 		};
 
-		var requests = [
+		/*var requests = [
 			{apiCommand: "lists/53c92e8da8dfc5f54adbd950",
 			dataSets: params,
 			propertyName: "API:ReadyForQA"},
@@ -27,6 +27,14 @@ TrelloVisionApp.factory('CardTableService', function() {
 		];
 
 		TrelloDataService.loadMultiData(scope, requests, function(scope) {
+			buildQACardTable(scope);
+
+			if ( afterBuildCardTable ) {
+				afterBuildCardTable(scope);
+			}
+		});*/
+
+		TrelloDataService.loadData(scope, 'lists/53e37d06f2ef915cb1407bbd', params, function(scope) {
 			buildCardTable(scope);
 
 			if ( afterBuildCardTable ) {
@@ -101,7 +109,7 @@ TrelloVisionApp.factory('CardTableService', function() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*----------------------------------------------------------------------------------------------------*/
-function buildCardTable(scope) {
+function buildQACardTable(scope) {
 	var board = scope.model.data;
 
 	var table = {

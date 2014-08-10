@@ -5,7 +5,8 @@ var TrelloVisionApp = angular
 
 var TrelloVisionModules = [
 	{ name: 'Overview', uri: '/overview' },
-	{ name: 'CardTable', uri: '/cardtable' }
+	{ name: 'CardTable', uri: '/cardtable' },
+	{ name: 'QACardTable', uri: '/qacardtable' }
 ];
 
 
