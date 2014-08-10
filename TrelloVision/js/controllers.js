@@ -46,11 +46,6 @@ function CardTableCtrl($scope, $routeParams, CardTableService, TrelloDataService
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*----------------------------------------------------------------------------------------------------*/
 function ListCardTableCtrl($scope, $routeParams, ListCardTableService, TrelloDataService) {
-	if ( !$routeParams.boardId ) {
-		$scope.model = { ready: true };
-		return;
-	}
-
 	ListCardTableService.loadBoardData(TrelloDataService, $scope, $routeParams);
 	$scope.model = TrelloDataService.model();
 }

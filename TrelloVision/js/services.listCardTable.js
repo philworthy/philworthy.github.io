@@ -9,6 +9,7 @@ TrelloVisionApp.factory('ListCardTableService', function() {
 	var svc = {};
 
 	svc.loadBoardData = function(TrelloDataService, scope, routeParams, afterBuildCardTable) {
+		console.log(">>>>load bd data");
 		var params = {
 			/*lists: 'open',
 			cards: 'visible',
