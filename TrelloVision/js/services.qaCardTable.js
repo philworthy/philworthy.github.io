@@ -3,6 +3,9 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*----------------------------------------------------------------------------------------------------*/
 TrelloVisionApp.factory('QACardTableService', function() {
+
+	console.log("did qa card service");
+
 	var svc = {};
 
 	svc.loadBoardData = function(TrelloDataService, scope, routeParams, afterBuildCardTable) {
