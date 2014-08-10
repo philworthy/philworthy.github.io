@@ -146,8 +146,8 @@ function buildListCardTable(scope) {
 		c.id = card.id;
 		c.shortId = card.idShort;
 		c.listId = card.idList;
-		c.listName = table.listMap[card.idList].name;
-		c.listNameFilter = cleanFilterText(c.listName);
+		c.listName = table.listMap[card.idList];
+		//c.listNameFilter = cleanFilterText(c.listName);
 		c.name = card.name;
 		c.desc = card.desc;
 		c.url = card.url;
@@ -186,13 +186,6 @@ function buildListCardTable(scope) {
 		for ( var mi in card.idMembers ) {
 			var memId = card.idMembers[mi];
 			c['member'+memId] = true;
-		}
-
-		var match;
-
-		while ( (match = HashTagPattern.exec(c.desc)) ) {
-			c.tags += '#'+match[3]+' ';
-			c.tagCount++;
 		}
 	}
 
