@@ -16,6 +16,9 @@ TrelloVisionApp.factory('ListCardTableService', function() {
 			card_checklists: 'all',
 			members: 'all',
 			organization: 'true'*/
+			actions: 'updateCard:idList',
+			checklists: 'all',
+			members: 'true'
 		};
 
 		/*var requests = [
@@ -121,10 +124,19 @@ function buildListCardTable(scope) {
 	var cards = scope.model.data;
 
 	var table = {
-		cards: []
+		cards: [],
+		listIds: [],
+		listMap: {}
 	};
 
 	scope.model.table = table;
+
+	table.listIds.push('53c92e8da8dfc5f54adbd950');
+	table.listMap['53c92e8da8dfc5f54adbd950'] = 'API: Ready for QA';
+	table.listIds.push('53e37d06f2ef915cb1407bbd');
+	table.listMap['53e37d06f2ef915cb1407bbd'] = 'API: In QA';
+	table.listIds.push('53e37d16740abf207bc80d1e');
+	table.listMap['53e37d16740abf207bc80d1e'] = 'API: Ready for Release';
 
 	for ( var ci in cards ) {
 		var card = cards[ci];
@@ -144,8 +156,8 @@ function buildListCardTable(scope) {
 		c.dueRaw = card.due;
 		c.due = (card.due == null ? null : moment(card.due).format('MMM D'));
 		c.memberCount = card.idMembers.length;
-		c.commentCount = card.badges.comments;
-		c.voteCount = card.badges.votes;
+		//c.commentCount = card.badges.comments;
+		//c.voteCount = card.badges.votes;
 		c.checklists = [];
 		c.tags = '';
 		c.tagCount = 0;
