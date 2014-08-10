@@ -54,12 +54,6 @@ TrelloVisionApp.factory('CardTableService', function() {
 					}
 				}
 
-				if ( search.tag ) {
-					if ( !isTextMatch(item.tags, search.tag) ) {
-						return false;
-					}
-				}
-
 				return true;
 			};
 		};

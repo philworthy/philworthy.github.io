@@ -4,18 +4,12 @@
 
 <div ng-show="model.ready">
 	
-	<div class="large-9 small-6 columns">
+	<div>
 		<h3>
-			{{model.table.board.name}}
-		</h3>
-		<p ng-show="model.table.board.desc.length > 0"
-			ng-bind-html-unsafe="descToHtml(model.table.board.desc, 'trelloTag')">
-		</p>
-		<p>
 			<a href="{{model.table.board.url}}" target="_blank">
-				View this board at Trello.com >
+				{{model.table.board.name}}
 			</a>
-		</p>
+		</h3>
 	</div>
 	
 </div>
@@ -26,7 +20,7 @@
 	
 	<div>
 		<h5>
-			Table Filters:
+			Card Filters:
 		</h5>
 	</div>
 	
@@ -36,10 +30,6 @@
 	
 	<div>
 		<input type="text" placeholder="Card Name" ng-model="search.name">
-	</div>
-	
-	<div>
-		<input type="text" placeholder="Tag Name" ng-model="search.tag">
 	</div>
 	
 	<hr/>
@@ -55,7 +45,7 @@
 
 		<ul ng-repeat="card in model.table.cards | filter:onFilter(search) | orderBy:sortProp:sortRev">
 			<li>
-				{{card.name}}, due:{{card.due}}, in list:<a href="#/cardtable/board/{{model.table.board.id}}?fl={{card.listNameFilter}}">{{card.listName}}</a>
+				{{card.name}} (<a href="#/cardtable/board/{{model.table.board.id}}?fl={{card.listNameFilter}}">{{card.listName}}</a>) due:{{card.due}}
 			</li>
 		</ul>
 	</div>
