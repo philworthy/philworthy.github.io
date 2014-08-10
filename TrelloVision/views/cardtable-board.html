@@ -1,148 +1,63 @@
-<div ng-cloak ng-show="!model.ready" class="wait">
+<div ng-cloak ng-show="!model.ready">
 	<p>Loading Trello data, please wait...</p>
 </div>
 
-<div class="row" ng-show="model.ready">
+<div ng-show="model.ready">
 	
 	<div class="large-9 small-6 columns">
 		<h3>
 			{{model.table.board.name}}
 		</h3>
-		<p ng-show="model.table.board.desc.length > 0" style="margin-top: 10px;"
+		<p ng-show="model.table.board.desc.length > 0"
 			ng-bind-html-unsafe="descToHtml(model.table.board.desc, 'trelloTag')">
 		</p>
 		<p>
-			<a href="#/cardtable/board/{{model.table.board.id}}/csv" target="_self">
-				Download table in CSV format >
-			</a><br/>
 			<a href="{{model.table.board.url}}" target="_blank">
 				View this board at Trello.com >
 			</a>
 		</p>
 	</div>
 	
-	<div class="large-3 small-6 columns">
-		<br/>
-		<h5>
-			Labels
-		</h5>
-		<div ng-repeat="color in model.table.labelColors">
-			<span class="swatch16" style="background-color: {{color}};"></span>
-			<span style="font-size: 0.8em;">{{model.table.labelMap[color]}}</span>
-		</div>
-	</div>
-	
 </div>
 
-<div class="row" ng-show="model.ready">
+<div ng-show="model.ready">
 	
 	<hr/>
 	
-	<div class="large-2 columns">
+	<div>
 		<h5>
 			Table Filters:
 		</h5>
 	</div>
 	
-	<div class="large-2 columns">
+	<div>
 		<input type="text" placeholder="List Name" ng-model="search.list">
 	</div>
 	
-	<div class="large-2 columns">
+	<div>
 		<input type="text" placeholder="Card Name" ng-model="search.name">
 	</div>
 	
-	<div class="large-2 columns">
+	<div>
 		<input type="text" placeholder="Tag Name" ng-model="search.tag">
-	</div>
-	
-	<div class="large-4 columns">
 	</div>
 	
 	<hr/>
 	
 </div>
 
-<div class="row" ng-show="model.ready">
+<div ng-show="model.ready">
 	
-	<div class="large-12 small-12 columns">
+	<div >
 		<h5>
 			Cards for the "{{model.table.board.name}}" Board
 		</h5>
 
-		<table style="font-size: 0.8em; width: 100%;" class="responsive">
-			<thead>
-				<tr>
-					<th title="Short ID"><a href="" ng-click="onSort('shortId');">#</a></th>
-					<th title="List Name"><a href="" ng-click="onSort('listName');">List</a></th>
-					<th title="Card Name"><a href="" ng-click="onSort('name');">Name</a></th>
-					<th title="Last Updated"><a href="" ng-click="onSort('updatedRaw');">Upd</a></th>
-					<th title="Green Label"><a href="" ng-click="onSort('greenLabel');">G</a></th>
-					<th title="Yellow Label"><a href="" ng-click="onSort('yellowLabel');">Y</a></th>
-					<th title="Orange Label"><a href="" ng-click="onSort('orangeLabel');">O</a></th>
-					<th title="Red Label"><a href="" ng-click="onSort('redLabel');">R</a></th>
-					<th title="Purple Label"><a href="" ng-click="onSort('purpleLabel');">P</a></th>
-					<th title="Blue Label"><a href="" ng-click="onSort('blueLabel');">B</a></th>
-					<th title="Member Count"><a href="" ng-click="onSort('-memberCount');">#M</a></th>
-					<th title="Comment Count"><a href="" ng-click="onSort('-commentCount');">#C</a></th>
-					<th title="Vote Count"><a href="" ng-click="onSort('-voteCount');">#V</a></th>
-					<th title="Tag Count"><a href="" ng-click="onSort('-tagCount');">#T</a></th>
-					<th title="Due Date"><a href="" ng-click="onSort('dueRaw');">Due</a></th>
-					<th title="Checklists">Chk</th>
-					<th ng-repeat="mem in model.table.members" title="{{mem.fullName}} ({{mem.username}})">
-						<a href="" ng-click="onSort('member'+mem.id);">{{mem.initials}}</a>
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr ng-repeat="card in model.table.cards | filter:onFilter(search) | orderBy:sortProp:sortRev">
-					<td>
-						{{card.shortId}}
-					</td>
-					<td>
-						<a href="#/cardtable/board/{{model.table.board.id}}?fl={{card.listNameFilter}}">
-							{{card.listName}}
-						</a>
-					</td>
-					<td>
-						<a href="#/powercard/{{card.id}}">
-							{{card.name}}
-						</a>
-					</td>
-					<td>
-						{{card.updated}}
-					</td>
-					<td ng-repeat="color in model.table.labelColors">
-						<span ng-show="card[color+'Label'] != null" class="swatch16" 
-						      style="background-color: {{color}}; width:10px;"
-							  title="{{card[color+'Label']}}"></span>
-					</td>
-					<td>
-						{{card.memberCount}}
-					</td>
-					<td>
-						{{card.commentCount}}
-					</td>
-					<td>
-						{{card.voteCount}}
-					</td>
-					<td title="{{card.tags}}">
-						{{card.tagCount}}
-					</td>
-					<td>
-						{{card.due}}
-					</td>
-					<td>
-						<span ng-repeat="list in card.checklists" title="{{list.name}}">
-						    {{list.progress}}
-						</span>
-					</td>
-					<td ng-repeat="mem in model.table.members">
-						<span ng-show="card['member'+mem.id] != null">X</span>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+		<ul ng-repeat="card in model.table.cards | filter:onFilter(search) | orderBy:sortProp:sortRev">
+			<li>
+				{{card.name}}, due:{{card.due}}
+			</li>
+		</ul>
 	</div>
 
 </div>
