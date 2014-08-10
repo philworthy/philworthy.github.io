@@ -1,0 +1,53 @@
+<div ng-cloak ng-show="!model.ready">
+	<p>Loading Trello data, please wait...</p>
+</div>
+
+<div ng-show="model.ready">
+	
+	<div>
+		<h3>
+			<a href="{{model.table.board.url}}" target="_blank">
+				{{model.table.board.name}}
+			</a>
+		</h3>
+	</div>
+	
+</div>
+
+<div ng-show="model.ready">
+	
+	<hr/>
+	
+	<div>
+		<h5>
+			Card Filters:
+		</h5>
+	</div>
+	
+	<div>
+		<input type="text" placeholder="List Name" ng-model="search.list">
+	</div>
+	
+	<div>
+		<input type="text" placeholder="Card Name" ng-model="search.name">
+	</div>
+	
+	<hr/>
+	
+</div>
+
+<div ng-show="model.ready">
+	
+	<div >
+		<h5>
+			Cards from multiple boards
+		</h5>
+
+		<ul ng-repeat="card in model.table.cards | filter:onFilter(search) | orderBy:sortProp:sortRev">
+			<li>
+				<a href="{{card.url}}" target="_blank">{{card.name}}</a> (<a href="#/cardtable/board/{{model.table.board.id}}?fl={{card.listNameFilter}}">{{card.listName}}</a>) due:{{card.due}}
+			</li>
+		</ul>
+	</div>
+
+</div>
