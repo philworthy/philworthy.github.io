@@ -11,14 +11,14 @@
 	<script src="js/trelloVision.js"></script>
 	<script src="js/services.js"></script>
 	<script src="js/services.cardTable.js"></script>
-	<script src="js/services.qaCardTable.js"></script>
+	<script src="js/services.listCardTable.js"></script>
 	<script src="js/controllers.js"></script>
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 	<link rel="stylesheet" href="css/theme.css">
 
 </head>
-<body ng-controller="LayoutCtrl" ng-cloak ng-show="model.ready" role="document">
+<body ng-controller="LayoutCtrl" role="document">
 
 	<!-- Fixed navbar -->
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -38,7 +38,7 @@
             <li><a href="#overview">Overview</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu" ng-repeat="mod in model.modules">
+              <ul class="dropdown-menu" role="menu" ng-repeat="mod in model.modules" ng-cloak ng-show="model.ready">
                 <li><a href="#{{mod.uri}}">{{mod.name}}</a></li>
               </ul>
             </li>

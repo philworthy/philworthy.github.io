@@ -45,12 +45,12 @@ function CardTableCtrl($scope, $routeParams, CardTableService, TrelloDataService
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*----------------------------------------------------------------------------------------------------*/
-function QACardTableCtrl($scope, $routeParams, QACardTableService, TrelloDataService) {
+function ListCardTableCtrl($scope, $routeParams, ListCardTableService, TrelloDataService) {
 	if ( !$routeParams.boardId ) {
 		$scope.model = { ready: true };
 		return;
 	}
 
-	QACardTableService.loadBoardData(TrelloDataService, $scope, $routeParams);
+	ListCardTableService.loadBoardData(TrelloDataService, $scope, $routeParams);
 	$scope.model = TrelloDataService.model();
 }
