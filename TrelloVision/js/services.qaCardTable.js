@@ -35,7 +35,7 @@ TrelloVisionApp.factory('QACardTableService', function() {
 		});*/
 
 		TrelloDataService.loadData(scope, 'lists/53e37d06f2ef915cb1407bbd', params, function(scope) {
-			buildCardTable(scope);
+			buildQACardTable(scope);
 
 			if ( afterBuildCardTable ) {
 				afterBuildCardTable(scope);
@@ -110,6 +110,9 @@ TrelloVisionApp.factory('QACardTableService', function() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*----------------------------------------------------------------------------------------------------*/
 function buildQACardTable(scope) {
+
+	console.log(scope.model.data);
+
 	var board = scope.model.data;
 
 	var table = {

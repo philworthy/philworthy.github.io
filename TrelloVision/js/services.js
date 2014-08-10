@@ -36,7 +36,7 @@ function buildRoutes($routeProvider) {
 		})
 		.when('/qacardtable', {
 			templateUrl: 'views/cardtable-board.html',
-			controller: CardTableCtrl
+			controller: QACardTableCtrl
 		})
 		.otherwise({
 			redirectTo: '/'
