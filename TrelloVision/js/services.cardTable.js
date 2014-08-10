@@ -92,7 +92,7 @@ TrelloVisionApp.factory('CardTableService', function() {
 /*----------------------------------------------------------------------------------------------------*/
 function buildCardTable(scope) {
 	
-	console.log("Card:"+scope.model.data);
+	console.log("Card:"+scope.model.data.toString());
 
 	var board = scope.model.data;
 
