@@ -21,7 +21,7 @@ TrelloVisionApp.factory('ListCardTableService', function() {
 			members: 'true'
 		};
 
-		/*var requests = [
+		var requests = [
 			{apiCommand: "lists/53c92e8da8dfc5f54adbd950",
 			dataSets: params,
 			propertyName: "API:ReadyForQA"},
@@ -39,16 +39,16 @@ TrelloVisionApp.factory('ListCardTableService', function() {
 			if ( afterBuildCardTable ) {
 				afterBuildCardTable(scope);
 			}
-		});*/
+		});
 
-		TrelloDataService.loadData(scope, 'lists/53e37d06f2ef915cb1407bbd/cards', params, function(scope) {
+		/*TrelloDataService.loadData(scope, 'lists/53e37d06f2ef915cb1407bbd/cards', params, function(scope) {
 			console.log(">>>>got data back");
 			buildListCardTable(scope);
 
 			if ( afterBuildCardTable ) {
 				afterBuildCardTable(scope);
 			}
-		});
+		});*/
 
 		scope.model = TrelloDataService.model();
 		scope.model.ready = false;
