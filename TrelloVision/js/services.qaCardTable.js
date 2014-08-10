@@ -111,7 +111,7 @@ TrelloVisionApp.factory('QACardTableService', function() {
 /*----------------------------------------------------------------------------------------------------*/
 function buildQACardTable(scope) {
 
-	console.log("QA");
+	console.log("QA"+scope.model.data);
 
 	var board = scope.model.data;
 
