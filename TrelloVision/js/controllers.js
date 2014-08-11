@@ -13,10 +13,6 @@ function LayoutCtrl($scope, $location, $window) {
 		version: TrelloVisionVersion,
 		ready: true
 	};
-
-	$scope.$on('$viewContentLoaded', function(event) {
-		$window.ga('send', 'pageview', $location.path()); //is $window necessary?
-	});
 }
 
 /*----------------------------------------------------------------------------------------------------*/
