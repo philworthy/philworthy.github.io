@@ -9,9 +9,9 @@ TrelloVisionApp.factory('ListCardTableService', function() {
 	svc.loadBoardData = function(TrelloDataService, scope, routeParams, afterBuildCardTable) {
 
 		var urls = [
-			"/lists/53c92e8da8dfc5f54adbd950/cards?checklists=all", // API: Ready for QA
-			"/lists/53e37d06f2ef915cb1407bbd/cards?checklists=all", // API: In QA
-			"/lists/53e37d16740abf207bc80d1e/cards?checklists=all" // API: Ready for Release
+			"/lists/53c92e8da8dfc5f54adbd950/cards?checklists=all&checkItemStates=true&members=true&actions=updateCard:idList", // API: Ready for QA
+			"/lists/53e37d06f2ef915cb1407bbd/cards?checklists=all&checkItemStates=true&members=true&actions=updateCard:idList", // API: In QA
+			"/lists/53e37d16740abf207bc80d1e/cards?checklists=all&checkItemStates=true&members=true&actions=updateCard:idList" // API: Ready for Release
 		];
 
 		var params = {
