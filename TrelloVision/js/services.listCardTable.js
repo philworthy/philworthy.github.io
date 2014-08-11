@@ -155,7 +155,7 @@ function buildListCardTable(scope) {
 		c.updated = moment(card.dateLastActivity).format('MMM D');
 		c.dueRaw = card.due;
 		c.due = (card.due == null ? null : moment(card.due).format('MMM D'));
-		c.memberCount = card.idMembers.length;
+		//c.memberCount = card.idMembers.length;
 		//c.commentCount = card.badges.comments;
 		//c.voteCount = card.badges.votes;
 		c.checklists = [];
