@@ -57,7 +57,7 @@ TrelloVisionApp.factory('TrelloDataService', function() {
 
 	svc.loadData = function(scope, apiCommand, dataSets, onDataSuccess) {
 		var onGetSuccess = function(data) {
-			console.log("on success");
+			console.log("Trello success");
 			model.data = data;
 			model.ready = true;
 
@@ -72,6 +72,7 @@ TrelloVisionApp.factory('TrelloDataService', function() {
 		var failCount = 0;
 
 		var onGetError = function(err) {
+			console.log("Trello error");
 			if ( ++failCount <= 3 && isTrelloAuthRequired(err) ) {
 				trelloAuth(sendTrelloCmd, onAuthError);
 				return;
@@ -82,11 +83,12 @@ TrelloVisionApp.factory('TrelloDataService', function() {
 		};
 
 		var sendTrelloCmd = function() {
-			console.log("send "+apiCommand);
+			console.log("Trello send "+apiCommand);
 			Trello.get(apiCommand, dataSets, onGetSuccess, onGetError);
 		};
 
 		var onAuthError = function() {
+			console.log("Trello oAuth error");
 			model.error = 'Trello authorization failed.';
 			scope.$apply();
 		};

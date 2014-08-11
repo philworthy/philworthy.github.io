@@ -4,8 +4,6 @@
 /*----------------------------------------------------------------------------------------------------*/
 TrelloVisionApp.factory('ListCardTableService', function() {
 
-	console.log(">>>>did list card service");
-
 	var svc = {};
 
 	svc.loadBoardData = function(TrelloDataService, scope, routeParams, afterBuildCardTable) {
@@ -118,8 +116,6 @@ TrelloVisionApp.factory('ListCardTableService', function() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*----------------------------------------------------------------------------------------------------*/
 function buildListCardTable(scope) {
-
-	console.log(">>>build list:"+scope.model.data.toString());
 
 	var cards = scope.model.data;
 
