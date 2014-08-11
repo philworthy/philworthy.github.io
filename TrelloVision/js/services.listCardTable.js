@@ -34,7 +34,7 @@ TrelloVisionApp.factory('ListCardTableService', function() {
 		];
 
 		TrelloDataService.loadMultiData(scope, requests, function(scope) {
-			buildQACardTable(scope);
+			buildListCardTable(scope);
 
 			if ( afterBuildCardTable ) {
 				afterBuildCardTable(scope);
