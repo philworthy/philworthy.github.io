@@ -7,7 +7,13 @@ TrelloVisionApp.factory('ListCardTableService', function() {
 	var svc = {};
 
 	svc.loadBoardData = function(TrelloDataService, scope, routeParams, afterBuildCardTable) {
-		console.log(">>>>load bd data");
+
+		var urls = [
+			"/lists/53c92e8da8dfc5f54adbd950/cards", // API: Ready for QA
+			"/lists/53e37d06f2ef915cb1407bbd/cards", // API: In QA
+			"/lists/53e37d16740abf207bc80d1e/cards" // API: Ready for Release
+		];
+
 		var params = {
 			/*lists: 'open',
 			cards: 'visible',
@@ -16,37 +22,17 @@ TrelloVisionApp.factory('ListCardTableService', function() {
 			organization: 'true'*/
 			//actions: 'updateCard:idList',
 			checklists: 'all',
-			members: 'true'
+			members: 'true',
+			urls: urls.toString()
 		};
 
-		var requests = [
-			{apiCommand: "lists/53c92e8da8dfc5f54adbd950/cards",
-			dataSets: params,
-			propertyName: "API:ReadyForQA"},
-			{apiCommand: "lists/53e37d06f2ef915cb1407bbd/cards",
-			dataSets: params,
-			propertyName: "API:InQA"},
-			{apiCommand: "lists/53e37d16740abf207bc80d1e/cards",
-			dataSets: params,
-			propertyName: "API:ReadyForRelease"}
-		];
-
-		TrelloDataService.loadMultiData(scope, requests, function(scope) {
+		TrelloDataService.loadData(scope, 'batch', params, function(scope) {
 			buildListCardTable(scope);
 
 			if ( afterBuildCardTable ) {
 				afterBuildCardTable(scope);
 			}
 		});
-
-		/*TrelloDataService.loadData(scope, 'lists/53e37d06f2ef915cb1407bbd/cards', params, function(scope) {
-			console.log(">>>>got data back");
-			buildListCardTable(scope);
-
-			if ( afterBuildCardTable ) {
-				afterBuildCardTable(scope);
-			}
-		});*/
 
 		scope.model = TrelloDataService.model();
 		scope.model.ready = false;
