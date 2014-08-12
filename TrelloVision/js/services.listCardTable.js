@@ -165,7 +165,9 @@ function buildListCardTable(scope) {
 					for(lci in list.checkItems) {
 						var lc = list.checkItems[lci];
 						var substrings = lc.name.split(":");
-						if(substrings.length==2) timeData.push({id: timeData.length+1, content: substrings[0], start: moment(substrings[1]).set('year',2014), type: 'point'});
+						var date = moment(substrings[1]);
+						date.set('year',2014);
+						if(substrings.length==2) timeData.push({id: timeData.length+1, content: substrings[0], start: date, type: 'point'});
 						c.schedule.push(lc.name);
 					}
 				}
