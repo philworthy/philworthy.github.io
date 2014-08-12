@@ -169,7 +169,7 @@ function buildListCardTable(scope) {
 							var year = moment().year();
 							var date = moment(substrings[1]);
 							date.year(year);
-							timeData.push({id: timeData.length+1, content: substrings[0], start: date, type: 'point'});
+							timeData.push({id: timeData.length+1, content: substrings[0], start: date.toDate(), type: 'point'});
 						}
 						c.schedule.push(lc.name);
 					}
@@ -177,8 +177,7 @@ function buildListCardTable(scope) {
 			}
 
 			var timeLineOptions = {
-				autoResize: true,
-				width: 500,
+				width: '100%',
 				height: 50,
 				showCurrentTime: true,
 				showMinorlabels: false
