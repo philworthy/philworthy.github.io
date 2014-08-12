@@ -13,12 +13,12 @@
 	
 </div>
 
+<div ng-show="model.ready" id="timeline" vis-timeline data="model.table.timeData" options="model.table.timeOptions" event="select" callback="onTimeLineCallback(params)" style="width: 100%"></div>
+
 <div ng-show="model.ready">
 	
 	<div >
 		<h5>QA Cards from all boards</h5>
-
-		<div ng-show="model.ready" id="timeline" vis-timeline data="model.table.timeData" options="model.table.timeOptions" event="select" callback="onTimeLineCallback(params)" style="width: 100%"></div>
 
 		<ul ng-repeat="card in model.table.cards | filter:onFilter(search) | orderBy:sortProp:sortRev">
 			<li>
