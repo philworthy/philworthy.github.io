@@ -136,15 +136,6 @@ function buildListCardTable(scope) {
 		listMap: {}
 	};
 
-	var timeData = [
-		{id: 1, content: 'item 1', start: '2014-04-20'},
-	    {id: 2, content: 'item 2', start: '2014-04-14'},
-	    {id: 3, content: 'item 3', start: '2014-04-18'},
-	    {id: 4, content: 'item 4', start: '2014-04-16', end: '2014-04-19'},
-	    {id: 5, content: 'item 5', start: '2014-04-25'},
-	    {id: 6, content: 'item 6', start: '2014-04-27', type: 'point'}
-	];
-
 	scope.model.table = table;
 
 	for(var ai in data) {
@@ -164,15 +155,23 @@ function buildListCardTable(scope) {
 			c.due = (card.due == null ? null : moment(card.due).format('MMM D'));
 			c.schedule = [];
 
+			var timeData = [
+				{id: 1, content: 'Now', start: moment(), type: 'point'}
+			];
+
 			for(li in card.checklists) {
 				var list = card.checklists[li];
 				if(list.name=="Schedule") {
 					for(lci in list.checkItems) {
 						var lc = list.checkItems[lci];
+						var substrings = lc.split(":");
+						if(substrings.length==2) timeData.push({id: timeData.length+1, content: substrings[0], start: moment(substrings[1]), type: 'point'});
 						c.schedule.push(lc.name);
 					}
 				}
 			}
+
+			
 
 			c.timeLine = {data: timeData, options: {}};
 		}
