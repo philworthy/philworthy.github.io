@@ -45,7 +45,7 @@
 
 		<ul ng-repeat="card in model.table.cards | filter:onFilter(search) | orderBy:sortProp:sortRev">
 			<li>
-				<a href="{{card.url}}" target="_blank">{{card.name}}</a> <span class="label label-primary">{{card.due}}</span> <span class="label label-warning">{{card.scheduleNote}}</span>
+				<a href="{{card.url}}" target="_blank">{{card.name}}</a> <span class="label label-primary">{{card.due}}</span> <span ng-repeat="schedule in model.table.cards.schedule" class="label label-warning">{{schedule}}</span>
 			</li>
 		</ul>
 	</div>

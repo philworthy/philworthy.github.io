@@ -149,17 +149,15 @@ function buildListCardTable(scope) {
 			c.listName = "List";
 			c.dueRaw = card.due;
 			c.due = (card.due == null ? null : moment(card.due).format('MMM D'));
-			c.scheduleNote = ""
+			c.schedule = [];
 
 			for(li in card.checklists) {
 				var list = card.checklists[li];
 				if(list.name=="Schedule") {
-					var schedule = [];
 					for(lci in list.checkItems) {
 						var lc = list.checkItems[lci];
 						schedule.push(lc.name);
 					}
-					c.scheduleNote = "Schedule: " + schedule.toString();
 				}
 			}
 		}
