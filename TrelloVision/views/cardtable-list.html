@@ -18,7 +18,7 @@
 	<div >
 		<h5>QA Cards from all boards</h5>
 
-		<ul ng-repeat="card in model.table.cards | filter:onFilter(search) | orderBy:sortProp:sortRev">
+		<ul ng-repeat="card in model.table.cards | filter:onFilter(search) | orderBy:sortProp:sortRev" class="nav nav-pills nav-stacked">
 			<li>
 				<a href="{{card.url}}" target="_blank">{{card.name}}</a> <span class="label label-primary">{{card.due}}</span> <span ng-repeat="schedule in card.schedule" class="label label-warning">{{schedule}}</span>
 			</li>

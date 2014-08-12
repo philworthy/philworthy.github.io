@@ -21,9 +21,9 @@
 			Cards for the "{{model.table.board.name}}" Board
 		</h5>
 
-		<ul ng-repeat="card in model.table.cards | filter:onFilter(search) | orderBy:sortProp:sortRev">
+		<ul ng-repeat="card in model.table.cards | filter:onFilter(search) | orderBy:sortProp:sortRev" class="nav nav-pills nav-stacked">
 			<li>
-				<a href="{{card.url}}" target="_blank">{{card.name}}</a> (<a href="#/cardtable/board/{{model.table.board.id}}?fl={{card.listNameFilter}}">{{card.listName}}</a>) due:{{card.due}}
+				<a href="{{card.url}}" target="_blank">{{card.name}}</a> <span class="label label-primary">{{card.due}}</span> <span ng-repeat="schedule in card.schedule" class="label label-warning">{{schedule}}</span>
 			</li>
 		</ul>
 	</div>
