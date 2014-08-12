@@ -158,6 +158,7 @@ function buildListCardTable(scope) {
 			table.cards.push(c);
 
 			c.name = card.name;
+			c.id = card.id
 			c.url = card.url;
 			c.listName = "List";
 			c.dueRaw = card.due;
@@ -179,7 +180,7 @@ function buildListCardTable(scope) {
 							var year = moment().year();
 							var date = moment(substrings[1]);
 							date.year(year);
-							table.timeData.push({group: c.url, content: substrings[0], start: date.toDate()});
+							table.timeData.push({group: c.id, content: substrings[0], start: date.toDate()});
 						}
 						c.schedule.push(lc.name);
 					}
