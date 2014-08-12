@@ -132,6 +132,7 @@ function buildListCardTable(scope) {
 
 	var timeLineOptions = {
 		width: '100%',
+		height: 200,
 		showCurrentTime: true,
 		showMinorlabels: false
 	};
