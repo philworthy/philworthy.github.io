@@ -18,7 +18,7 @@
 	<div >
 		<h5>QA Cards from all boards</h5>
 
-		<div vis-timeline data="card.timeLine.data" options="card.timeLine.options" event="select" callback="onTimeLineCallback(params)" style="width: 100%"></div>
+		<div vis-timeline data="model.table.timeData" options="model.table.timeOptions" event="select" callback="onTimeLineCallback(params)" style="width: 100%"></div>
 
 		<ul ng-repeat="card in model.table.cards | filter:onFilter(search) | orderBy:sortProp:sortRev">
 			<li>

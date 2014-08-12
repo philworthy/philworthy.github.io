@@ -184,10 +184,6 @@ function buildListCardTable(scope) {
 					}
 				}
 			}
-
-			
-
-			c.timeLine = {data: timeData, options: {}};
 		}
 	}	
 }
