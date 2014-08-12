@@ -3,35 +3,13 @@
 </div>
 
 <div ng-show="model.ready">
-	
-	<div>
-		<h3>
-			<a href="{{model.table.board.url}}" target="_blank">
-				{{model.table.board.name}}
-			</a>
-		</h3>
-	</div>
-	
-</div>
 
-<div ng-show="model.ready">
-	
-	<hr/>
-	
-	<div>
-		<h5>
-			Card Filters:
-		</h5>
+	<h5>Filters:</h5>
+	<div class="form-group">
+		<input type="text" class="form-control" placeholder="Card Name" ng-model="search.name">
+		<input type="text" class="form-control" placeholder="List Name" ng-model="search.list">
 	</div>
-	
-	<div>
-		<input type="text" placeholder="List Name" ng-model="search.list">
-	</div>
-	
-	<div>
-		<input type="text" placeholder="Card Name" ng-model="search.name">
-	</div>
-	
+
 	<hr/>
 	
 </div>
