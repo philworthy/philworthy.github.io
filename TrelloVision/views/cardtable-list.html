@@ -45,7 +45,7 @@
 
 		<ul ng-repeat="card in model.table.cards | filter:onFilter(search) | orderBy:sortProp:sortRev">
 			<li>
-				<a href="{{card.url}}" target="_blank">{{card.name}}</a> (<a href="#/cardtable/board/{{model.table.board.id}}?fl={{card.listNameFilter}}">{{card.listName}}</a>) Due:{{card.due}} {{card.scheduleNote}}
+				<a href="{{card.url}}" target="_blank">{{card.name}}</a> {{"Due:"+card.due}} {{card.scheduleNote}}
 			</li>
 		</ul>
 	</div>
