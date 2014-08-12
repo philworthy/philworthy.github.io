@@ -113,8 +113,8 @@ function buildCardTable(scope) {
 		table.listMap[list.id] = list;
 	}
 
-	for(var ci in cards) {
-		var card = cards[ci];
+	for(var ci in board.cards) {
+		var card = board.cards[ci];
 		var c = {};
 		table.cards.push(c);
 
