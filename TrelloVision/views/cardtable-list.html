@@ -4,21 +4,17 @@
 
 <div ng-show="model.ready">
 
-	<form class="navbar-form navbar-left" role="search">
-		<h5>Filters:</h5>
-		<div class="form-group">
-			<input type="text" class="form-control" placeholder="Card Name" ng-model="search.name">
-		</div>
-	</form>
+	<h5>Filters:</h5>
+	<div class="form-group">
+		<input type="text" class="form-control" placeholder="Card Name" ng-model="search.name">
+	</div>
 	
 </div>
 
 <div ng-show="model.ready">
 	
 	<div >
-		<h5>
-			QA Cards from all boards
-		</h5>
+		<h5>QA Cards from all boards</h5>
 
 		<ul ng-repeat="card in model.table.cards | filter:onFilter(search) | orderBy:sortProp:sortRev">
 			<li>
