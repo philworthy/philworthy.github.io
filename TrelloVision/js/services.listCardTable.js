@@ -156,7 +156,7 @@ function buildListCardTable(scope) {
 				if(list.name=="Schedule") {
 					for(lci in list.checkItems) {
 						var lc = list.checkItems[lci];
-						schedule.push(lc.name);
+						c.schedule.push(lc.name);
 					}
 				}
 			}
