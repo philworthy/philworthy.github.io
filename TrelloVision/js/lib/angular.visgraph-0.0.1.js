@@ -46,6 +46,9 @@ angular.module('angular.vistimeline', []).directive('visTimeline', [function() {
         });
       };      
       scope.$watch('data', function(newval, oldval) {
+        while (container.firstChild) {
+            container.removeChild(container.firstChild);
+        }
         buildGraph(scope);
       }, true);        
     }
