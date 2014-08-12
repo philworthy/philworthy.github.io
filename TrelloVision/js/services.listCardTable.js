@@ -130,10 +130,18 @@ function buildListCardTable(scope) {
 
 	var data = scope.model.data;
 
+	var timeLineOptions = {
+		width: '100%',
+		showCurrentTime: true,
+		showMinorlabels: false
+	};
+
 	var table = {
 		cards: [],
 		listIds: [],
-		listMap: {}
+		listMap: {},
+		timeData: [{content: 'Now', start: moment(), type: 'point'}],
+		timeOptions: timeLineOptions,
 	};
 
 	scope.model.table = table;
@@ -155,9 +163,10 @@ function buildListCardTable(scope) {
 			c.due = (card.due == null ? null : moment(card.due).format('MMM D'));
 			c.schedule = [];
 
-			var timeData = [
-				{content: 'Now', start: moment(), type: 'point'}
-			];
+			if(card.due != null) {
+				table.timeData.push({content: card.name, start: moment(card.due).toDate()});
+			}
+			
 
 			for(li in card.checklists) {
 				var list = card.checklists[li];
@@ -169,19 +178,14 @@ function buildListCardTable(scope) {
 							var year = moment().year();
 							var date = moment(substrings[1]);
 							date.year(year);
-							timeData.push({id: timeData.length+1, content: substrings[0], start: date.toDate()});
+							table.timeData.push({content: substrings[0], start: date.toDate()});
 						}
 						c.schedule.push(lc.name);
 					}
 				}
 			}
 
-			var timeLineOptions = {
-				width: 300,
-				height: 50,
-				showCurrentTime: true,
-				showMinorlabels: false
-			};
+			
 
 			c.timeLine = {data: timeData, options: {}};
 		}
