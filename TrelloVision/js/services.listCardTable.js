@@ -164,7 +164,7 @@ function buildListCardTable(scope) {
 				if(list.name=="Schedule") {
 					for(lci in list.checkItems) {
 						var lc = list.checkItems[lci];
-						var substrings = lc.split(":");
+						var substrings = lc.name.split(":");
 						if(substrings.length==2) timeData.push({id: timeData.length+1, content: substrings[0], start: moment(substrings[1]), type: 'point'});
 						c.schedule.push(lc.name);
 					}
