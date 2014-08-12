@@ -182,7 +182,7 @@ function buildListCardTable(scope) {
 				showMinorlabels: false
 			};
 
-			c.timeLine = {data: timeData, options: timeLineOptions;
+			c.timeLine = {data: timeData, options: timeLineOptions};
 		}
 	}	
 }
