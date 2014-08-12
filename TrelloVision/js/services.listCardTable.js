@@ -135,7 +135,8 @@ function buildListCardTable(scope) {
 				if(list.name=="Schedule") {
 					var schedule = [];
 					for(lci in list.checkItems) {
-						schedule.push(lci.name);
+						var lc = list.checkItems[lci];
+						schedule.push(lc.name);
 					}
 					c.schedule = schedule.toString();
 				}
