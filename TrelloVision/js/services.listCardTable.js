@@ -179,7 +179,7 @@ function buildListCardTable(scope) {
 							var year = moment().year();
 							var date = moment(substrings[1]);
 							date.year(year);
-							table.timeData.push({content: substrings[0], start: date.toDate()});
+							table.timeData.push({group: c.url, content: substrings[0], start: date.toDate()});
 						}
 						c.schedule.push(lc.name);
 					}
