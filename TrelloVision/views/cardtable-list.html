@@ -21,7 +21,7 @@
 		<ul ng-repeat="card in model.table.cards | filter:onFilter(search) | orderBy:sortProp:sortRev">
 			<li>
 				<span ng-repeat="schedule in card.schedule"><span class="label label-warning">{{schedule}}</span> </span><span class="label label-primary">{{card.due}}</span> <a href="{{card.url}}" target="_blank">{{card.name}}</a>
-				<div id="graph" vis-graph data="card.timeLine.data" options="card.timeLine.options" event="select" callback="onTimeLineCallback(params)" style="width: 300px; height: 50px">{{card.timeLine.data}}</div>
+				<div id="graph" vis-graph data="card.timeLine.data" options="card.timeLine.options" event="select" callback="onTimeLineCallback(params)" style="width: 300px; height: 50px">test {{card.timeLine.data}}</div>
 			</li>
 		</ul>
 	</div>
