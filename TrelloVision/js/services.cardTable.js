@@ -113,61 +113,28 @@ function buildCardTable(scope) {
 		table.listMap[list.id] = list;
 	}
 
-	for ( var ci in board.cards ) {
-		var card = board.cards[ci];
+	for(var ci in cards) {
+		var card = cards[ci];
 		var c = {};
 		table.cards.push(c);
 
-		c.id = card.id;
-		c.shortId = card.idShort;
+		c.name = card.name;
+		c.url = card.url;
 		c.listId = card.idList;
 		c.listName = table.listMap[card.idList].name;
 		c.listNameFilter = cleanFilterText(c.listName);
-		c.name = card.name;
-		c.desc = card.desc;
-		c.url = card.url;
-		c.updatedRaw = card.dateLastActivity;
-		c.updated = moment(card.dateLastActivity).format('MMM D');
 		c.dueRaw = card.due;
 		c.due = (card.due == null ? null : moment(card.due).format('MMM D'));
-		c.memberCount = card.idMembers.length;
-		c.commentCount = card.badges.comments;
-		c.voteCount = card.badges.votes;
-		c.checklists = [];
-		c.tags = '';
-		c.tagCount = 0;
+		c.schedule = [];
 
-		for ( li in card.labels ) {
-			var lbl = card.labels[li];
-			c[lbl.color+'Label'] = lbl.name;
-		}
-
-		for ( li in card.checklists ) {
+		for(li in card.checklists) {
 			var list = card.checklists[li];
-			var comp = 0;
-
-			for ( i in list.checkItems ) {
-				if ( list.checkItems[i].state == 'complete' ) {
-					++comp;
+			if(list.name=="Schedule") {
+				for(lci in list.checkItems) {
+					var lc = list.checkItems[lci];
+					c.schedule.push(lc.name);
 				}
 			}
-
-			c.checklists.push({
-				name: list.name,
-				progress: comp+'/'+list.checkItems.length
-			});
-		}
-
-		for ( var mi in card.idMembers ) {
-			var memId = card.idMembers[mi];
-			c['member'+memId] = true;
-		}
-
-		var match;
-
-		while ( (match = HashTagPattern.exec(c.desc)) ) {
-			c.tags += '#'+match[3]+' ';
-			c.tagCount++;
 		}
 	}
 }
