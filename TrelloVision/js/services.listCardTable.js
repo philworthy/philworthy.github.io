@@ -8,11 +8,32 @@ TrelloVisionApp.factory('ListCardTableService', function() {
 
 	svc.loadBoardData = function(TrelloDataService, scope, routeParams, afterBuildCardTable) {
 
-		var urls = [
-			"/lists/53c92e8da8dfc5f54adbd950/cards?checklists=all&checkItemStates=true&members=true&actions=updateCard:idList&list=true", // API: Ready for QA
-			"/lists/53e37d06f2ef915cb1407bbd/cards?checklists=all&checkItemStates=true&members=true&actions=updateCard:idList&list=true", // API: In QA
-			"/lists/53e37d16740abf207bc80d1e/cards?checklists=all&checkItemStates=true&members=true&actions=updateCard:idList&list=true" // API: Ready for Release
+		var lists = [
+			// Bugs
+			"53dbd8ceea98842ab014477f",
+			"53de515f00d9cf841328bb27",
+			// Workflow
+			"52540c6068d4feb45200c88a",
+			"53e33898956cc9437376b593",
+			// Web
+			"53847c6e402857b8fda7c75c",
+			"53d23c0bc8fd0a464b34ba91",
+			// HTML PLayer
+			"53cff888a3cc3fa2f1f55412",
+			"53def3e720f3d69469307eeb",
+			// Flash Player
+			"53d6d8d08fae1976ba265b34",
+			"53e37f8c82b9163a73699e91",
+			// Node API
+			"53c92e8da8dfc5f54adbd950",
+			"53e37d06f2ef915cb1407bbd"
 		];
+
+		var urls = [];
+		for(li in lists) {
+			l = lists[li];
+			urls.push("/lists/"+l+"/cards?checklists=all&checkItemStates=true&members=true&actions=updateCard:idList&list=true");
+		}
 
 		var params = {
 			/*lists: 'open',
@@ -21,8 +42,8 @@ TrelloVisionApp.factory('ListCardTableService', function() {
 			members: 'all',
 			organization: 'true'*/
 			//actions: 'updateCard:idList',
-			checklists: 'all',
-			members: 'true',
+			//checklists: 'all',
+			//members: 'true',
 			urls: urls.toString()
 		};
 
@@ -128,7 +149,7 @@ function buildListCardTable(scope) {
 			c.listName = "List";
 			c.dueRaw = card.due;
 			c.due = (card.due == null ? null : moment(card.due).format('MMM D'));
-			c.schedule = ""
+			c.scheduleNote = ""
 
 			for(li in card.checklists) {
 				var list = card.checklists[li];
@@ -138,7 +159,7 @@ function buildListCardTable(scope) {
 						var lc = list.checkItems[lci];
 						schedule.push(lc.name);
 					}
-					c.schedule = schedule.toString();
+					c.scheduleNote = "Schedule: " + schedule.toString();
 				}
 			}
 		}
