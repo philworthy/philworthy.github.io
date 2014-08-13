@@ -22,9 +22,9 @@ TrelloVisionApp.factory('BoardService', function() {
 			var data = scope.model.data;
 
 			var maps = {
-				lists = {},
-				members = {},
-				cards = {}
+				lists: {},
+				members: {},
+				cards: {}
 			}
 
 			// build map of lists
