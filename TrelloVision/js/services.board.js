@@ -79,7 +79,7 @@ TrelloVisionApp.factory('BoardService', function() {
 
 			// add actions to cards
 			for(var _a in data.actions) {
-				var action = data.action[_a];
+				var action = data.actions[_a];
 				var card = maps.cards[action.data.card.id];
 				card.actions.push(action);
 			}
