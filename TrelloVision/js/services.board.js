@@ -106,7 +106,7 @@ TrelloVisionApp.factory('BoardService', function() {
 
 				card.timelineOptions = {
 					width: 500,
-					height: 30,
+					height: 100,
 					showCurrentTime: true,
 					showMinorlabels: false,
 				    editable: false,
