@@ -109,7 +109,9 @@ TrelloVisionApp.factory('BoardService', function() {
 					height: 30,
 					showCurrentTime: true,
 					showMinorlabels: false,
-				    editable: false
+				    editable: false,
+				    stack: false,
+				    zoomable: false
 				};
 
 				// from actions
