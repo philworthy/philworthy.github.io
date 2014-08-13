@@ -112,9 +112,9 @@ TrelloVisionApp.factory('BoardService', function() {
 				card.timeline = [];
 
 				// from actions
-				card.actions.sort(function(a, b){return b.date-a.date});
+				card.actions.sort(function(a, b){return a.date-b.date});
 				var previousAction = null;
-				for(var _a in card.actions) {
+				for(var _a=0; _a<card.actions.length; _a++) {
 					var action = card.actions[_a];
 					if(previousAction) card.timeline.push(buildTimeRangeItem(card.id, previousAction, action.date));
 					previousAction = action;
