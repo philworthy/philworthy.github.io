@@ -81,7 +81,7 @@ TrelloVisionApp.factory('BoardService', function() {
 			for(var _a in data.actions) {
 				var action = data.actions[_a];
 				var card = maps.cards[action.data.card.id];
-				card.actions.push(action);
+				if(card) card.actions.push(action);
 			}
 
 			// build timeline helper function
