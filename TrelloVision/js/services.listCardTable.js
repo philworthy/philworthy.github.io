@@ -171,7 +171,7 @@ function buildListCardTable(scope) {
 			c.schedule = [];
 
 			if(card.due != null) {
-				table.timeData.push({content: card.name, start: moment(card.due).toDate()});
+				table.timeData.push({type: 'point', group: c.id, content: card.name, start: moment(card.due).toDate()});
 			}
 			
 
