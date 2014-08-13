@@ -147,7 +147,8 @@ function buildListCardTable(scope) {
 		listMap: {},
 		timeData: [{content: 'Now', start: moment(), type: 'point'}],
 		timeOptions: timeLineOptions,
-		timeGroups: {}
+		timeGroups: [],
+		timeGroupsMap: {}
 	};
 
 	scope.model.table = table;
@@ -170,6 +171,12 @@ function buildListCardTable(scope) {
 			c.due = (card.due == null ? null : moment(card.due).format('MMM D'));
 			c.schedule = [];
 
+			if(!table.timeGroupsMap[c.id]) {
+				var group = {id: c.id, content: c.name, value: table.timeGroups.length+1};
+				table.timeGroupsMap[c.id] = group;
+				table.timeGroups.push(group);
+			}
+
 			if(card.due != null) {
 				table.timeData.push({type: 'point', group: c.id, content: card.name, start: moment(card.due).toDate()});
 			}
@@ -185,7 +192,6 @@ function buildListCardTable(scope) {
 							var year = moment().year();
 							var date = moment(substrings[1]);
 							date.year(year);
-							if(!table.timeGroups[c.id]) table.timeGroups[c.id] = {id: c.id, content: c.name, value: table.timeGroups.length};
 							table.timeData.push({type: 'point', group: c.id, content: substrings[0], start: date.toDate()});
 						}
 						c.schedule.push(lc.name);
