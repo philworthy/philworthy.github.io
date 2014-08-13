@@ -23,7 +23,7 @@
 
 		<ul ng-repeat="card in model.data.cards | filter:onFilter(search) | orderBy:sortProp:sortRev">
 			<li>
-				<span ng-repeat="schedule in card.schedule"><span class="label label-warning">{{schedule.nameDate}}</span> </span><span class="label label-primary">{{card.dueDate}}</span> <a href="{{card.url}}" target="_blank">{{card.name}}</a> 
+				<span ng-repeat="schedule in card.schedule"><a href="#/board/{{model.data.id}}?fl={{card.list.name}}">{{card.list.name}}</a>: <span class="label label-warning">{{schedule.nameDate}}</span> </span><span class="label label-primary">{{card.dueDate}}</span> <a href="{{card.url}}" target="_blank">{{card.name}}</a> 
 			</li>
 		</ul>
 	</div>
