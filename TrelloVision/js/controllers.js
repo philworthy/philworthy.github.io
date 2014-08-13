@@ -45,3 +45,11 @@ function ListCardTableCtrl($scope, $routeParams, ListCardTableService, TrelloDat
 	ListCardTableService.loadBoardData(TrelloDataService, $scope, $routeParams);
 	$scope.model = TrelloDataService.model();
 }
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*----------------------------------------------------------------------------------------------------*/
+function BoardCtrl($scope, $routeParams, BoardService, TrelloDataService) {
+	BoardService.loadData(TrelloDataService, $scope, $routeParams);
+	$scope.model = TrelloDataService.model();
+}

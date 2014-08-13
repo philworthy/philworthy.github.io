@@ -37,6 +37,14 @@ function buildRoutes($routeProvider) {
 			templateUrl: 'views/cardtable-list.html',
 			controller: ListCardTableCtrl
 		})
+		.when('/board', {
+			templateUrl: 'views/overview.html',
+			controller: OverviewCtrl
+		})
+		.when('/board/:boardId', {
+			templateUrl: 'views/board.html',
+			controller: BoardCtrl
+		})
 		.otherwise({
 			redirectTo: '/'
 		});
@@ -61,7 +69,7 @@ TrelloVisionApp.factory('TrelloDataService', function() {
 			model.ready = true;
 
 			if ( onDataSuccess ) {
-				console.log("data success");
+				console.log("Trello data success");
 				onDataSuccess(scope);
 			}
 
