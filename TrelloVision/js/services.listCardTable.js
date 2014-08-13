@@ -135,7 +135,7 @@ function buildListCardTable(scope) {
 		height: 200,
 		showCurrentTime: true,
 		showMinorlabels: false,
-		groupOrder: 'id',
+		groupOrder: 'content',
 	    editable: true
 	};
 
