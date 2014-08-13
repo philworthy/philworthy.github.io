@@ -113,7 +113,7 @@ TrelloVisionApp.factory('BoardService', function() {
 
 				// from actions
 				card.actions.sort(function(a, b) { 
-				    return a.date - b.date;
+				    return b.date - a.date;
 				});
 				var previousAction = null;
 				for(var _a=0; _a<card.actions.length; _a++) {
