@@ -85,13 +85,6 @@ TrelloVisionApp.factory('BoardService', function() {
 			}
 
 			// build timeline helper function
-			var timelineOptions = {
-				width: 500,
-				height: 50,
-				showCurrentTime: true,
-				showMinorlabels: false,
-			    editable: false
-			};
 			var buildTimeRangeItem = function(cardId, previousAction, endDate) {
 				var item = {
 					type: 'range', 
@@ -110,6 +103,14 @@ TrelloVisionApp.factory('BoardService', function() {
 			for(var _c in data.cards) {
 				var card = data.cards[_c];
 				card.timeline = [];
+
+				card.timelineOptions = {
+					width: 500,
+					height: 30,
+					showCurrentTime: true,
+					showMinorlabels: false,
+				    editable: false
+				};
 
 				// from actions
 				card.actions.sort(function(a, b) { 
