@@ -92,8 +92,8 @@ TrelloVisionApp.factory('BoardService', function() {
 					start: moment(previousAction.date).toDate(),
 					end: moment(endDate).toDate()
 				}
-				if(previousAction.type == "createCard") item.content: previousAction.data.list.name;
-				else if(previousAction.type == "updateCard") item.content: previousAction.data.listAfter.name;
+				if(previousAction.type == "createCard") item.content = previousAction.data.list.name;
+				else if(previousAction.type == "updateCard") item.content = previousAction.data.listAfter.name;
 				else if(previousAction.type == "moveCardToBoard") item.content = previousAction.data.list.name; 
 				else if(previousAction.type == "moveCardFromBoard") item.content = previousAction.data.boardTarget.name;
 				return item;
