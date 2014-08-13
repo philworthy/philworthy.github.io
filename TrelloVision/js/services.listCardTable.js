@@ -171,12 +171,12 @@ function buildListCardTable(scope) {
 
 			if(!table.timeGroupsMap[c.id]) {
 				var group = {id: c.id, content: c.name};
-				table.timeGroupsMap[c.id] = group;
 				table.timeGroups.push(group);
+				table.timeGroupsMap[c.id] = table.timeGroups.length;
 			}
 
 			if(card.due != null) {
-				table.timeData.push({type: 'point', group: c.id, content: card.name, start: moment(card.due).toDate()});
+				table.timeData.push({type: 'point', group: table.timeGroupsMap[c.id], content: card.name, start: moment(card.due).toDate()});
 			}
 			
 
@@ -190,7 +190,7 @@ function buildListCardTable(scope) {
 							var year = moment().year();
 							var date = moment(substrings[1]);
 							date.year(year);
-							table.timeData.push({type: 'point', group: c.id, content: substrings[0], start: date.toDate()});
+							table.timeData.push({type: 'point', group: table.timeGroupsMap[c.id], content: substrings[0], start: date.toDate()});
 						}
 						c.schedule.push(lc.name);
 					}
