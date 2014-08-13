@@ -135,9 +135,7 @@ function buildListCardTable(scope) {
 		height: 200,
 		showCurrentTime: true,
 		showMinorlabels: false,
-		groupOrder: function (a, b) {
-	    	return a.value - b.value;
-	    },
+		groupOrder: 'id',
 	    editable: true
 	};
 
@@ -172,7 +170,7 @@ function buildListCardTable(scope) {
 			c.schedule = [];
 
 			if(!table.timeGroupsMap[c.id]) {
-				var group = {id: c.id, content: c.name, value: table.timeGroups.length+1};
+				var group = {id: c.id, content: c.name};
 				table.timeGroupsMap[c.id] = group;
 				table.timeGroups.push(group);
 			}
