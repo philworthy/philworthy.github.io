@@ -134,7 +134,11 @@ function buildListCardTable(scope) {
 		width: '100%',
 		height: 200,
 		showCurrentTime: true,
-		showMinorlabels: false
+		showMinorlabels: false,
+		groupOrder: function (a, b) {
+	    	return a.value - b.value;
+	    },
+	    editable: true
 	};
 
 	var table = {
@@ -143,6 +147,7 @@ function buildListCardTable(scope) {
 		listMap: {},
 		timeData: [{content: 'Now', start: moment(), type: 'point'}],
 		timeOptions: timeLineOptions,
+		timeGroups: {}
 	};
 
 	scope.model.table = table;
@@ -180,6 +185,7 @@ function buildListCardTable(scope) {
 							var year = moment().year();
 							var date = moment(substrings[1]);
 							date.year(year);
+							if(!table.timeGroups[c.id]) table.timeGroups[c.id] = {id: c.id, content: c.name, value: table.timeGroups.length};
 							table.timeData.push({group: c.id, content: substrings[0], start: date.toDate()});
 						}
 						c.schedule.push(lc.name);
