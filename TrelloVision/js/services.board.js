@@ -96,8 +96,8 @@ TrelloVisionApp.factory('BoardService', function() {
 				var item = {
 					type: 'range', 
 					group: cardId, 
-					end: moment(previousAction.date).toDate(),
-					start: moment(endDate).toDate()
+					start: moment(previousAction.date).toDate(),
+					end: moment(endDate).toDate()
 				}
 				if(previousAction.type == "createCard") item.content = previousAction.data.list.name;
 				else if(previousAction.type == "updateCard") item.content = previousAction.data.listAfter.name;
@@ -112,7 +112,7 @@ TrelloVisionApp.factory('BoardService', function() {
 				card.timeline = [];
 
 				// from actions
-				card.actions.sort(function(a, b){return a.date-b.date});
+				card.actions.sort(function(a, b){return b.date-a.date});
 				var previousAction = null;
 				for(var _a in card.actions) {
 					var action = card.actions[_a];
