@@ -92,13 +92,6 @@ TrelloVisionApp.factory('BoardService', function() {
 				showMinorlabels: false,
 			    editable: false
 			};
-			var compareDates = function(a,b) {
-				if (a.date < b.date)
-					return -1;
-				if (a.date > b.date)
-					return 1;
-				return 0;
-			}
 			var buildTimeRangeItem = function(cardId, previousAction, endDate) {
 				var item = {
 					type: 'range', 
@@ -119,7 +112,9 @@ TrelloVisionApp.factory('BoardService', function() {
 				card.timeline = [];
 
 				// from actions
-				card.actions.sort(compareDates);
+				card.actions.sort(function(a, b) { 
+				    return a.date - b.date;
+				});
 				var previousAction = null;
 				for(var _a=0; _a<card.actions.length; _a++) {
 					var action = card.actions[_a];
