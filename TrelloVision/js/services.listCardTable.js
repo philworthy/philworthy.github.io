@@ -186,7 +186,7 @@ function buildListCardTable(scope) {
 							var date = moment(substrings[1]);
 							date.year(year);
 							if(!table.timeGroups[c.id]) table.timeGroups[c.id] = {id: c.id, content: c.name, value: table.timeGroups.length};
-							table.timeData.push({group: c.id, content: substrings[0], start: date.toDate()});
+							table.timeData.push({type: 'point', group: c.id, content: substrings[0], start: date.toDate()});
 						}
 						c.schedule.push(lc.name);
 					}
