@@ -26,6 +26,18 @@ TrelloVisionApp.factory('BoardService', function() {
 			
 			var data = scope.model.data;
 
+			var timeline = [];
+			scope.model.timeline = timeline;
+			scope.model.timelineOptions = {
+				width: '100%',
+				height: '100%',
+				showCurrentTime: true,
+				showMinorlabels: false,
+			    editable: false,
+			    stack: false,
+			    zoomable: false
+			};
+
 			var maps = {
 				lists: {},
 				members: {},
@@ -107,6 +119,7 @@ TrelloVisionApp.factory('BoardService', function() {
 				var item = {
 					type: 'info', 
 					value: (timeRangeItem.end-timeRangeItem.start)/startEndRange*100,
+					duration: moment(timeRangeItem.end-timeRangeItem.start).duration().humanize(),
 					name: timeRangeItem.content
 				}
 				var str = timeRangeItem.content.toLowerCase();
@@ -144,12 +157,14 @@ TrelloVisionApp.factory('BoardService', function() {
 					if(previousAction) {
 						var timeRangeItem = buildTimeRangeItem(card.id, previousAction, action.date);
 						card.timeline.push(timeRangeItem);
+						timeline.push(timeRangeItem);
 					}
 					previousAction = action;
 				}
 				if(previousAction) {
 					var timeRangeItem = buildTimeRangeItem(card.id, previousAction, moment().toDate());
 					card.timeline.push(timeRangeItem);
+					timeline.push(timeRangeItem);
 				}
 
 				// build progressBar
@@ -172,22 +187,26 @@ TrelloVisionApp.factory('BoardService', function() {
 				// from schedule
 				for(var _s in card.schedule) {
 					var s = card.schedule[_s];
-					card.timeline.push({
+					var timelineItem = {
 						content: s.name,
 						type: 'point', 
 						group: card.id, 
 						start: s.date.toDate()
-					});
+					};
+					card.timeline.push(timelineItem);
+					timeline.push(timelineItem);
 				}
 
 				// from due date
 				if(card.due) {
-					card.timeline.push({
+					var timelineItem = {
 						content: 'Due',
 						type: 'point', 
 						group: card.id, 
 						start: moment(card.due).toDate()
-					});
+					};
+					card.timeline.push(timelineItem);
+					timeline.push(timelineItem);
 				}
 			}
 
