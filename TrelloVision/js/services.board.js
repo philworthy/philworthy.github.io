@@ -71,6 +71,7 @@ TrelloVisionApp.factory('BoardService', function() {
 			for(var _c in data.cards) {
 				var card = data.cards[_c];
 				maps.cards[card.id] = card;
+				card.descHtml = descToHtml(card.desc);
 				card.list = maps.lists[card.idList];
 				card.state = setStateType(card.list.name);
 				card.actions = [];
