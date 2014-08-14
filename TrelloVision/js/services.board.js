@@ -110,7 +110,7 @@ TrelloVisionApp.factory('BoardService', function() {
 					name: timeRangeItem.content
 				}
 				var str = timeRangeItem.content.toLowerCase();
-				if (str.match(/^(.*in[ -]?box.*|.*backlog.*|.*discussion.*|.*moth.*|.*ice.*)$/)) item.type = "info"
+				if (str.match(/^(.*in[ -]?box.*|.*backlog.*|.*discussion.*|.*moth.*|.*ice.*|.*frozen.*)$/)) item.type = "info"
 				else if (str.match(/^(.*prioritised.*|.*prioritized.*|.*ready.*|.*to[ -]?do.*)$/)) item.type = null
 				else if (str.match(/^(.*doing.*|.*progress.*|.*development.*)$/)) item.type = "success"
 				else if (str.match(/^(.*ready.*|.*waiting.*|.*pending.*|.*blocked.*)$/)) item.type = "warning"
