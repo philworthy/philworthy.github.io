@@ -164,7 +164,7 @@ TrelloVisionApp.factory('BoardService', function() {
 					else if(previousAction.type == "updateCard") item.content = previousAction.data.listAfter.name;
 					else if(previousAction.type == "moveCardToBoard") item.content = previousAction.data.list.name; 
 					else if(previousAction.type == "moveCardFromBoard") item.content = previousAction.data.boardTarget.name;
-					item.state: setStateType(item.content);
+					item.state = setStateType(item.content);
 					return item;
 				};
 				card.actions.sort(function(a, b) { 
