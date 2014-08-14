@@ -23,8 +23,13 @@
 
 		<ul ng-repeat="card in model.data.cards | filter:onFilter(search) | orderBy:sortProp:sortRev">
 			<li>
-				<p class="lead">{{card.list.name}}: <span ng-repeat="schedule in card.schedule"><span class="label label-warning">{{schedule.nameDate}}</span> </span><span class="label label-primary">Due: {{card.dueDate}}</span> <a href="{{card.url}}" target="_blank">{{card.name}}</a></p><br/>
-				<p><span ng-repeat="bar in card.progressBar">{{bar.name}}: {{bar.duration}} → </span></p>
+				<p class="lead"><a href="{{card.url}}" target="_blank">{{card.name}}</a></p>
+				<p>{{card.list.name}}, Due:{{card.dueDate}}</p>
+				<small><span ng-repeat="bar in card.progressBar">"{{bar.name}}": {{bar.duration}} </span></small>
+
+
+				<!-- <p class="lead">{{card.list.name}}: <span ng-repeat="schedule in card.schedule"><span class="label label-warning">{{schedule.nameDate}}</span> </span><span class="label label-primary">Due: {{card.dueDate}}</span> <a href="{{card.url}}" target="_blank">{{card.name}}</a></p><br/>
+				<p><span ng-repeat="bar in card.progressBar">"{{bar.name}}": {{bar.duration}} </span></p> -->
 				<!-- <progress style="width:300px"><bar ng-repeat="bar in card.progressBar" value="bar.value" type="{{bar.type}}"><span ng-hide="bar.value < 10">{{bar.name}}</span></bar></progress> -->
 				<!-- <div vis-timeline data="card.timeline" options="card.timelineOptions"></div> -->
 			</li>
