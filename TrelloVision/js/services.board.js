@@ -103,7 +103,7 @@ TrelloVisionApp.factory('BoardService', function() {
 				else if(previousAction.type == "moveCardFromBoard") item.content = previousAction.data.boardTarget.name;
 				return item;
 			};
-			var buildProgressBarItem = function(timeRangeItem, dateOffset) {
+			var buildProgressBarItem = function(timeRangeItem) {
 				var item = {
 					type: 'info', 
 					value: timeRangeItem.end-timeRangeItem.start,
@@ -166,7 +166,7 @@ TrelloVisionApp.factory('BoardService', function() {
 				card.progressBarMax = progressBarMax - progressBarMin;
 				for(var _t in card.timeline) {
 					var item = card.timeline[_t];
-					card.progressBar.push(buildProgressBarItem(timeRangeItem, progressBarMin));
+					card.progressBar.push(buildProgressBarItem(timeRangeItem));
 				}
 
 				// from schedule
