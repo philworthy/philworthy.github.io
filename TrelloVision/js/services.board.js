@@ -110,7 +110,7 @@ TrelloVisionApp.factory('BoardService', function() {
 					name: timeRangeItem.content
 				}
 				var str = timeRangeItem.content.toLowerCase();
-				if (str.match(/^(backlog|discussion|moth|ice)$/)) item.type = "info"
+				if (str.match(/^(in[ -]?box|backlog|discussion|moth|ice)$/)) item.type = "info"
 				else if (str.match(/^(prioritised|prioritized|ready|to[ -]?do)$/)) item.type = null
 				else if (str.match(/^(doing|progress|development)$/)) item.type = "success"
 				else if (str.match(/^(ready|waiting|blocked)$/)) item.type = "warning"
@@ -166,7 +166,7 @@ TrelloVisionApp.factory('BoardService', function() {
 				card.progressBarMax = progressBarMax - progressBarMin;
 				for(var _t in card.timeline) {
 					var item = card.timeline[_t];
-					card.progressBar.push(buildProgressBarItem(timeRangeItem));
+					card.progressBar.push(buildProgressBarItem(item));
 				}
 
 				// from schedule
