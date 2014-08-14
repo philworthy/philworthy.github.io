@@ -44,6 +44,17 @@ TrelloVisionApp.factory('BoardService', function() {
 				cards: {}
 			}
 
+			// helper function
+			var setStateType = function(state) {
+				var str = state.toLowerCase();
+				if (str.match(/^(.*in[ -]?box.*|.*backlog.*|.*discussion.*|.*moth.*|.*ice.*|.*frozen.*)$/)) return "inactive"
+				else if (str.match(/^(.*prioritised.*|.*prioritized.*|.*ready.*|.*to[ -]?do.*|.*ready.*|.*waiting.*|.*pending.*|.*blocked.*)$/)) return "waiting"
+				else if (str.match(/^(.*doing.*|.*progress.*|.*development.*)$/)) return "doing"
+				else if (str.match(/^(.*qa.*|.*test.*|.*review.*)$/)) return "testing"
+				else if (str.match(/^(.*done.*|.*release.*|.*ship.*|.*roll.*)$/)) return "done"
+				return
+			}
+
 			// build map of lists
 			for(var _l in data.lists) {
 				var list = data.lists[_l];
@@ -126,15 +137,6 @@ TrelloVisionApp.factory('BoardService', function() {
 				}
 				return item;
 			};
-			var setStateType = function(state) {
-				var str = state.toLowerCase();
-				if (str.match(/^(.*in[ -]?box.*|.*backlog.*|.*discussion.*|.*moth.*|.*ice.*|.*frozen.*)$/)) return "inactive"
-				else if (str.match(/^(.*prioritised.*|.*prioritized.*|.*ready.*|.*to[ -]?do.*|.*ready.*|.*waiting.*|.*pending.*|.*blocked.*)$/)) return "waiting"
-				else if (str.match(/^(.*doing.*|.*progress.*|.*development.*)$/)) return "doing"
-				else if (str.match(/^(.*qa.*|.*test.*|.*review.*)$/)) return "testing"
-				else if (str.match(/^(.*done.*|.*release.*|.*ship.*|.*roll.*)$/)) return "done"
-				return
-			}
 
 			// build timeline and progress bar
 			for(var _c in data.cards) {
