@@ -89,7 +89,7 @@ TrelloVisionApp.factory('BoardService', function() {
 				if(card) card.actions.push(action);
 			}
 
-			// build timeline helper function
+			// build helper functions
 			var buildTimeRangeItem = function(cardId, previousAction, endDate) {
 				var item = {
 					type: 'range', 
@@ -103,8 +103,23 @@ TrelloVisionApp.factory('BoardService', function() {
 				else if(previousAction.type == "moveCardFromBoard") item.content = previousAction.data.boardTarget.name;
 				return item;
 			};
+			var buildProgressBarItem = function(timeRangeItem, dateOffset) {
+				var item = {
+					type: 'info', 
+					value: timeRangeItem.end-timeRangeItem.start-dateOffset,
+					name: timeRangeItem.content
+				}
+				var str = timeRangeItem.content.toLowerCase();
+				if (str.match(/^(backlog|discussion|moth|ice)$/)) item.type = "info"
+				else if (str.match(/^(prioritised|prioritized|ready|to[ -]?do)$/)) item.type = null
+				else if (str.match(/^(doing|progress|development)$/)) item.type = "success"
+				else if (str.match(/^(ready|waiting|blocked)$/)) item.type = "warning"
+				else if (str.match(/^(qa|test|review)$/)) item.type = "danger"
+				else if (str.match(/^(release|ship|roll)$/)) item.type = "info"
+				return item;
+			};
 
-			// build timeline
+			// build timeline and progress bar
 			for(var _c in data.cards) {
 				var card = data.cards[_c];
 				card.timeline = [];
@@ -126,10 +141,33 @@ TrelloVisionApp.factory('BoardService', function() {
 				var previousAction = null;
 				for(var _a=0; _a<card.actions.length; _a++) {
 					var action = card.actions[_a];
-					if(previousAction) card.timeline.push(buildTimeRangeItem(card.id, previousAction, action.date));
+					if(previousAction) {
+						var timeRangeItem = buildTimeRangeItem(card.id, previousAction, action.date);
+						card.timeline.push(timeRangeItem);
+					}
 					previousAction = action;
 				}
-				if(previousAction) card.timeline.push(buildTimeRangeItem(card.id, previousAction, moment().toDate()));
+				if(previousAction) {
+					var timeRangeItem = buildTimeRangeItem(card.id, previousAction, moment().toDate());
+					card.timeline.push(timeRangeItem);
+				}
+
+				// build progressBar
+				card.progressBar = [];
+				var progressBarMin = null;
+				var progressBarMax = null;
+				for(var _t in card.timeline) {
+					var item = card.timeline[_t];
+					if(!progressBarMin) progressBarMin = item.start;
+					else if(item.start < progressBarMin) progressBarMin = item.start;
+					if(!progressBarMax) progressBarMax = item.end;
+					else if(item.end > progressBarMax) progressBarMax = item.end;
+				}
+				card.progressBarMax = progressBarMax - progressBarMin;
+				for(var _t in card.timeline) {
+					var item = card.timeline[_t];
+					card.progressBar.push(buildProgressBarItem(timeRangeItem, progressBarMin));
+				}
 
 				// from schedule
 				for(var _s in card.schedule) {
