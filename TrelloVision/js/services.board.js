@@ -106,7 +106,7 @@ TrelloVisionApp.factory('BoardService', function() {
 			var buildProgressBarItem = function(timeRangeItem, dateOffset) {
 				var item = {
 					type: 'info', 
-					value: timeRangeItem.end-timeRangeItem.start-dateOffset,
+					value: timeRangeItem.end-timeRangeItem.start-moment(dateOffset).toDate(),
 					name: timeRangeItem.content
 				}
 				var str = timeRangeItem.content.toLowerCase();
