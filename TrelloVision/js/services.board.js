@@ -85,10 +85,10 @@ TrelloVisionApp.factory('BoardService', function() {
 
 				// add schedule
 				var parseAsDate(string) {
-					return
+					return 0
 				}
 				var parseAsDuration(string) {
-					return
+					return 0
 				}
 				card.schedule = [];
 				for(var _cl in card.checklists) {
