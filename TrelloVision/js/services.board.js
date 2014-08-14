@@ -72,7 +72,7 @@ TrelloVisionApp.factory('BoardService', function() {
 				var card = data.cards[_c];
 				maps.cards[card.id] = card;
 				card.list = maps.lists[card.idList];
-				card.state = setStateType(card.list);
+				card.state = setStateType(card.list.name);
 				card.actions = [];
 				card.dueDate = (card.due ? moment(card.due).format('MMM D') : null);
 
