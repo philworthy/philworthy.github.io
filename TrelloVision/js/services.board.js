@@ -120,7 +120,7 @@ TrelloVisionApp.factory('BoardService', function() {
 				var item = {
 					type: 'info', 
 					value: duration/startEndRange*100,
-					duration: moment(duration, "milliseconds").duration().humanize(),
+					duration: moment.duration(duration, "milliseconds").humanize(),
 					name: timeRangeItem.content
 				}
 				var str = timeRangeItem.content.toLowerCase();
