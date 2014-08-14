@@ -116,10 +116,11 @@ TrelloVisionApp.factory('BoardService', function() {
 				return item;
 			};
 			var buildProgressBarItem = function(timeRangeItem, startEndRange) {
+				var duration = timeRangeItem.end-timeRangeItem.start;
 				var item = {
 					type: 'info', 
-					value: (timeRangeItem.end-timeRangeItem.start)/startEndRange*100,
-					duration: moment(timeRangeItem.end-timeRangeItem.start).duration().humanize(),
+					value: duration/startEndRange*100,
+					duration: moment(duration, "milliseconds").duration().humanize(),
 					name: timeRangeItem.content
 				}
 				var str = timeRangeItem.content.toLowerCase();
