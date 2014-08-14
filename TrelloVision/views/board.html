@@ -25,7 +25,7 @@
 			<li>
 				<h4><a href="{{card.url}}" target="_blank">{{card.name}}</a></h4>
 				<p>{{card.list.name}}, Due:{{card.dueDate}}</p>
-				<small ng-repeat="bar in card.progressBar"><span ng-class="{'inactive':'label label-default' 'waiting':'label label-warning' 'doing':'label label-primary' 'testing':'label label-danger' 'done':'label label-success'}[bar.type]">"{{bar.name}}": {{bar.duration}}</span> </small>
+				<small ng-repeat="bar in card.progressBar"><span ng-class="{'inactive':'label label-default', 'waiting':'label label-warning', 'doing':'label label-primary', 'testing':'label label-danger', 'done':'label label-success'}[bar.type]">"{{bar.name}}": {{bar.duration}}</span> </small>
 				<br/>
 
 				<!-- <p class="lead">{{card.list.name}}: <span ng-repeat="schedule in card.schedule"><span class="label label-warning">{{schedule.nameDate}}</span> </span><span class="label label-primary">Due: {{card.dueDate}}</span> <a href="{{card.url}}" target="_blank">{{card.name}}</a></p><br/>
