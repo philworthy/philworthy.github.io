@@ -24,7 +24,7 @@
 		<ul ng-repeat="card in model.data.cards | filter:onFilter(search) | orderBy:sortProp:sortRev">
 			<li>
 				{{card.list.name}}: <span ng-repeat="schedule in card.schedule"><span class="label label-warning">{{schedule.nameDate}}</span> </span><span class="label label-primary">{{card.dueDate}}</span> <a href="{{card.url}}" target="_blank">{{card.name}}</a>
-				<progress><bar ng-repeat="bar in card.progressBar" value="bar.value" type="{{bar.type}}"><span>{{bar.name}}</span></bar></progress>
+				<progress class="progress"><bar class="progress-bar" ng-repeat="bar in card.progressBar" value="bar.value" type="{{bar.type}}"><span>{{bar.name}}</span></bar></progress>
 
 				<!-- <div vis-timeline data="card.timeline" options="card.timelineOptions"></div> -->
 			</li>
