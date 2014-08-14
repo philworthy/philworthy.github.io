@@ -45,14 +45,14 @@ TrelloVisionApp.factory('BoardService', function() {
 			}
 
 			// helper function
-			var setStateType = function(state) {
-				var str = state.toLowerCase();
+			var setStateType = function(_s) {
+				var str = _s.toLowerCase();
 				if (str.match(/^(.*in[ -]?box.*|.*backlog.*|.*discussion.*|.*moth.*|.*ice.*|.*frozen.*)$/)) return "inactive"
 				else if (str.match(/^(.*prioritised.*|.*prioritized.*|.*ready.*|.*to[ -]?do.*|.*ready.*|.*waiting.*|.*pending.*|.*blocked.*)$/)) return "waiting"
 				else if (str.match(/^(.*doing.*|.*progress.*|.*development.*)$/)) return "doing"
 				else if (str.match(/^(.*qa.*|.*test.*|.*review.*)$/)) return "testing"
 				else if (str.match(/^(.*done.*|.*release.*|.*ship.*|.*roll.*)$/)) return "done"
-				return
+				return "inactive";
 			}
 
 			// build map of lists
