@@ -158,13 +158,14 @@ TrelloVisionApp.factory('BoardService', function() {
 						type: 'range', 
 						group: cardId, 
 						start: moment(previousAction.date).toDate(),
-						end: moment(endDate).toDate()
+						end: moment(endDate).toDate(),
 					}
 					if(previousAction.type == "createCard") item.content = previousAction.data.list.name;
 					else if(previousAction.type == "updateCard") item.content = previousAction.data.listAfter.name;
 					else if(previousAction.type == "moveCardToBoard") item.content = previousAction.data.list.name; 
 					else if(previousAction.type == "moveCardFromBoard") item.content = previousAction.data.boardTarget.name;
 					item.state = setStateType(item.content);
+					item.duration = moment.duration((item.end-item.start), "milliseconds").humanize();
 					return item;
 				};
 				card.actions.sort(function(a, b) { 
