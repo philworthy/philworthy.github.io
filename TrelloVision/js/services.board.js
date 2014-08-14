@@ -105,7 +105,7 @@ TrelloVisionApp.factory('BoardService', function() {
 			};
 			var buildProgressBarItem = function(timeRangeItem, startEndRange) {
 				var item = {
-					type: 'warning', 
+					type: 'info', 
 					value: (timeRangeItem.end-timeRangeItem.start)/startEndRange*100,
 					name: timeRangeItem.content
 				}
