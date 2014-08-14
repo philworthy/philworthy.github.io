@@ -23,9 +23,9 @@
 
 		<ul ng-repeat="card in model.data.cards | filter:onFilter(search) | orderBy:sortProp:sortRev">
 			<li>
-				<h4><a href="{{card.url}}" target="_blank">{{card.name}}</a></h4>
-				<p>{{card.list.name}}, Due:{{card.dueDate}}</p>
-				<span ng-repeat="bar in card.progressBar" ng-class="{'inactive':'grey', 'waiting':'orange', 'doing':'blue', 'testing':'red', 'done':'green'}[bar.type]">{{bar.name}} for {{bar.duration}} </span>
+				<h4><span ng-class="{'inactive':'label label-default', 'waiting':'label label-warning', 'doing':'label label-primary', 'testing':'label label-danger', 'done':'label label-success'}[bar.type]">{{card.list.name}}</span><a href="{{card.url}}" target="_blank">{{card.name}}</a></h4>
+				<strong ng-hide="card.dueDate == null">Due:{{card.dueDate}}</strong>
+				<small><span ng-repeat="bar in card.progressBar">{{bar.name}} for {{bar.duration}}, </span>and that's it!</small>
 				<br/>
 
 				<!-- <p class="lead">{{card.list.name}}: <span ng-repeat="schedule in card.schedule"><span class="label label-warning">{{schedule.nameDate}}</span> </span><span class="label label-primary">Due: {{card.dueDate}}</span> <a href="{{card.url}}" target="_blank">{{card.name}}</a></p><br/>
