@@ -23,7 +23,7 @@
 
 		<ul ng-repeat="card in model.data.cards | filter:onFilter(search) | orderBy:sortProp:sortRev">
 			<li>
-				<h6>{{card.list.name}}: <span ng-repeat="schedule in card.schedule"><span class="label label-warning">{{schedule.nameDate}}</span> </span><span class="label label-primary">{{card.dueDate}}</span> <a href="{{card.url}}" target="_blank">{{card.name}}</a></h6><progress style="width:300px"><bar ng-repeat="bar in card.progressBar" value="bar.value" type="{{bar.type}}"><span ng-hide="bar.value < 10">{{bar.name}}</span></bar></progress>
+				{{card.list.name}}: <span ng-repeat="schedule in card.schedule"><span class="label label-warning">{{schedule.nameDate}}</span> </span><span class="label label-primary">{{card.dueDate}}</span> <a href="{{card.url}}" target="_blank">{{card.name}}</a><progress style="width:300px"><bar ng-repeat="bar in card.progressBar" value="bar.value" type="{{bar.type}}"><span ng-hide="bar.value < 10">{{bar.name}}</span></bar></progress>
 				<!-- <div vis-timeline data="card.timeline" options="card.timelineOptions"></div> -->
 			</li>
 		</ul>
