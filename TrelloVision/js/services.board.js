@@ -84,12 +84,12 @@ TrelloVisionApp.factory('BoardService', function() {
 					card.members.push(maps.members[idMember]);
 				}
 
-				// add schedule
-				var parseAsDate = function(string) {
-					return 0
-				}
-				var parseAsDuration = function(string) {
-					return 0
+				// add (parse) schedule and durations
+				var getItemState = function(_s) {
+					var str = _s.toLowerCase();
+					if (str.match(/^(.*doing.*|.*progress.*|.*development.*)$/)) return "doing"
+					else if (str.match(/^(.*qa.*|.*test.*|.*review.*)$/)) return "testing"
+					return null;
 				}
 				card.schedule = [];
 				for(var _cl in card.checklists) {
@@ -99,14 +99,31 @@ TrelloVisionApp.factory('BoardService', function() {
 							var checkItem = checklist.checkItems[_ci];
 							var substrings = checkItem.name.split(":");
 							if(substrings.length==2) {
-								var year = moment().year();
-								var date = moment(substrings[1]);
-								date.year(year);
-								card.schedule.push({
-									name: substrings[0],
-									date: date,
-									nameDate: substrings[0] + ': ' + date.format('MMM D')
-								});
+								var item = null;
+								var str = substrings[0].toLowerCase();
+								if (str.match(/^(.*est.*|.*dur.*|.*effort.*)$/)) {
+									var date = moment.duration(substrings[1]);
+									var item = {
+										name: substrings[0],
+										type: 'duration',
+										state: getItemState(substrings[0]),
+										date: date,
+										nameDate: substrings[0] + ': ' + date.humanize()
+									};
+									card.schedule.push(item);
+								} else {
+									var year = moment().year();
+									var date = moment(substrings[1]);
+									date.year(year);
+									var item = {
+										name: substrings[0],
+										type: 'date',
+										state: getItemState(substrings[0]),
+										date: date,
+										nameDate: substrings[0] + ': ' + date.format('MMM D')
+									};
+									card.schedule.push(item);
+								}
 							}
 						}
 					}
@@ -119,31 +136,6 @@ TrelloVisionApp.factory('BoardService', function() {
 				var card = maps.cards[action.data.card.id];
 				if(card) card.actions.push(action);
 			}
-
-			// build helper functions
-			var buildTimeRangeItem = function(cardId, previousAction, endDate) {
-				var item = {
-					type: 'range', 
-					group: cardId, 
-					start: moment(previousAction.date).toDate(),
-					end: moment(endDate).toDate()
-				}
-				if(previousAction.type == "createCard") item.content = previousAction.data.list.name;
-				else if(previousAction.type == "updateCard") item.content = previousAction.data.listAfter.name;
-				else if(previousAction.type == "moveCardToBoard") item.content = previousAction.data.list.name; 
-				else if(previousAction.type == "moveCardFromBoard") item.content = previousAction.data.boardTarget.name;
-				return item;
-			};
-			var buildProgressBarItem = function(timeRangeItem, startEndRange) {
-				var duration = timeRangeItem.end-timeRangeItem.start;
-				var item = {
-					type: setStateType(timeRangeItem.content), 
-					value: duration/startEndRange*100,
-					duration: moment.duration(duration, "milliseconds").humanize(),
-					name: timeRangeItem.content
-				}
-				return item;
-			};
 
 			// build timeline and progress bar
 			for(var _c in data.cards) {
@@ -160,7 +152,21 @@ TrelloVisionApp.factory('BoardService', function() {
 				    zoomable: false
 				};
 
-				// from actions
+				// build timeline from actions
+				var buildTimeRangeItem = function(cardId, previousAction, endDate) {
+					var item = {
+						type: 'range', 
+						group: cardId, 
+						start: moment(previousAction.date).toDate(),
+						end: moment(endDate).toDate()
+					}
+					if(previousAction.type == "createCard") item.content = previousAction.data.list.name;
+					else if(previousAction.type == "updateCard") item.content = previousAction.data.listAfter.name;
+					else if(previousAction.type == "moveCardToBoard") item.content = previousAction.data.list.name; 
+					else if(previousAction.type == "moveCardFromBoard") item.content = previousAction.data.boardTarget.name;
+					item.state: setStateType(item.content);
+					return item;
+				};
 				card.actions.sort(function(a, b) { 
 				    return moment(b.date).isBefore(a.date);
 				});
@@ -180,7 +186,17 @@ TrelloVisionApp.factory('BoardService', function() {
 					timeline.push(timeRangeItem);
 				}
 
-				// build progressBar
+				// build progressBar from actions
+				var buildProgressBarItem = function(timeRangeItem, startEndRange) {
+					var duration = timeRangeItem.end-timeRangeItem.start;
+					var item = {
+						state: setStateType(timeRangeItem.content), 
+						value: duration/startEndRange*100,
+						duration: moment.duration(duration, "milliseconds").humanize(),
+						name: timeRangeItem.content
+					}
+					return item;
+				};
 				card.progressBar = [];
 				var progressBarMin = null;
 				var progressBarMax = null;
@@ -197,10 +213,12 @@ TrelloVisionApp.factory('BoardService', function() {
 					card.progressBar.push(buildProgressBarItem(item, startEndRange));
 				}
 
-				// from schedule
+				// build timeline from schedule
 				for(var _s in card.schedule) {
 					var s = card.schedule[_s];
+					if(s.type == 'duration') continue;
 					var timelineItem = {
+						state: setStateType(s.name), 
 						content: s.name,
 						type: 'point', 
 						group: card.id, 
@@ -210,9 +228,10 @@ TrelloVisionApp.factory('BoardService', function() {
 					timeline.push(timelineItem);
 				}
 
-				// from due date
+				// build timeline from due date
 				if(card.due) {
 					var timelineItem = {
+						state: 'done',
 						content: 'Due',
 						type: 'point', 
 						group: card.id, 

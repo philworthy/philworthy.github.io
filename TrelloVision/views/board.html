@@ -23,8 +23,8 @@
 
 		<ul ng-repeat="card in model.data.cards | filter:onFilter(search) | orderBy:sortProp:sortRev">
 			<li>
-				<h4><span ng-class="{'inactive':'label label-default', 'waiting':'label label-warning', 'doing':'label label-primary', 'testing':'label label-danger', 'done':'label label-success'}[card.state]">{{card.list.name}}</span><a href="{{card.url}}" target="_blank" tooltip-html-unsafe="{{card.descHtml}}" tooltip-trigger="mouseenter"> {{card.name}}</a></h4>
-				<p><strong ng-repeat="schedule in card.schedule">{{schedule.nameDate}}, </strong><strong ng-hide="card.dueDate == null">Due: {{card.dueDate}}</strong></p>
+				<h4><a href="{{card.url}}" target="_blank" tooltip-html-unsafe="{{card.descHtml}}" tooltip-trigger="mouseenter"> {{card.name}}</a></h4>
+				<p><span ng-class="{'inactive':'label label-default', 'waiting':'label label-warning', 'doing':'label label-primary', 'testing':'label label-danger', 'done':'label label-success'}[card.state]">{{card.list.name}} </span><strong ng-repeat="schedule in card.schedule" ng-class="{'inactive':'label label-default', 'waiting':'label label-warning', 'doing':'label label-primary', 'testing':'label label-danger', 'done':'label label-success'}[schedule.state]">{{schedule.nameDate}}, </strong><strong ng-hide="card.dueDate == null" ng-class="label label-success">Due: {{card.dueDate}}</strong></p>
 				<!-- <button popover="I appeared on mouse enter!" popover-trigger="mouseenter" class="btn btn-default">Mouseenter</button> -->
 
 				<!-- <small><span ng-repeat="bar in card.progressBar">{{bar.name}} for {{bar.duration}}, </span>and that's it!</small>
