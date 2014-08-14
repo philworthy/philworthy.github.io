@@ -61,6 +61,7 @@ TrelloVisionApp.factory('BoardService', function() {
 				var card = data.cards[_c];
 				maps.cards[card.id] = card;
 				card.list = maps.lists[card.idList];
+				card.state = setStateType(card.list);
 				card.actions = [];
 				card.dueDate = (card.due ? moment(card.due).format('MMM D') : null);
 
@@ -118,20 +119,22 @@ TrelloVisionApp.factory('BoardService', function() {
 			var buildProgressBarItem = function(timeRangeItem, startEndRange) {
 				var duration = timeRangeItem.end-timeRangeItem.start;
 				var item = {
-					type: 'info', 
+					type: setStateType(timeRangeItem.content), 
 					value: duration/startEndRange*100,
 					duration: moment.duration(duration, "milliseconds").humanize(),
 					name: timeRangeItem.content
 				}
-				var str = timeRangeItem.content.toLowerCase();
-				if (str.match(/^(.*in[ -]?box.*|.*backlog.*|.*discussion.*|.*moth.*|.*ice.*|.*frozen.*)$/)) item.type = "info"
-				else if (str.match(/^(.*prioritised.*|.*prioritized.*|.*ready.*|.*to[ -]?do.*)$/)) item.type = null
-				else if (str.match(/^(.*doing.*|.*progress.*|.*development.*)$/)) item.type = "success"
-				else if (str.match(/^(.*ready.*|.*waiting.*|.*pending.*|.*blocked.*)$/)) item.type = "warning"
-				else if (str.match(/^(.*qa.*|.*test.*|.*review.*)$/)) item.type = "danger"
-				else if (str.match(/^(.*release.*|.*ship.*|.*roll.*)$/)) item.type = "info"
 				return item;
 			};
+			var setStateType = function(state) {
+				var str = state.toLowerCase();
+				if (str.match(/^(.*in[ -]?box.*|.*backlog.*|.*discussion.*|.*moth.*|.*ice.*|.*frozen.*)$/)) return "inactive"
+				else if (str.match(/^(.*prioritised.*|.*prioritized.*|.*ready.*|.*to[ -]?do.*|.*ready.*|.*waiting.*|.*pending.*|.*blocked.*)$/)) return "waiting"
+				else if (str.match(/^(.*doing.*|.*progress.*|.*development.*)$/)) return "doing"
+				else if (str.match(/^(.*qa.*|.*test.*|.*review.*)$/)) return "testing"
+				else if (str.match(/^(.*done.*|.*release.*|.*ship.*|.*roll.*)$/)) return "done"
+				return
+			}
 
 			// build timeline and progress bar
 			for(var _c in data.cards) {
