@@ -10,11 +10,16 @@ TrelloVisionApp.factory('BoardService', function() {
 
 		var params = {
 			lists: 'open',
+			list_fields: 'name',
 			cards: 'visible',
 			card_checklists: 'all',
 			members: 'all',
+			member_fields: 'fullName,initials,avatarHash',
 			organization: 'true',
-			actions: 'createCard,moveCardToBoard,updateCard:idList,moveCardFromBoard'
+			actions: 'createCard,moveCardToBoard,updateCard:idList,moveCardFromBoard',
+			actions_limit: 1000,
+			action_member: false,
+			action_memberCreator: false
 		};
 
 		TrelloDataService.loadData(scope, 'boards/'+routeParams.boardId, params, function(scope) {
