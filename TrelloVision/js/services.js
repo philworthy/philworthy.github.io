@@ -1,6 +1,6 @@
 
 var TrelloVisionApp = angular
-	.module('TrelloVision', ['angular.vistimeline'])
+	.module('TrelloVision', ['ngRoute', 'ngResource', 'angular.vistimeline'])
 	.config(['$routeProvider', buildRoutes]);
 
 var TrelloVisionModules = [
