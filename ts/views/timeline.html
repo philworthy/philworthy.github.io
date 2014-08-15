@@ -5,11 +5,13 @@
 <div ng-show="model.ready">
 	
 	<div >
-		<h3>Tbimeline for the "{{model.data.name}}" Board</h3>
+		<h3>Timeline for the "{{model.data.name}}" Board</h3>
 		<br/>
 
-		<div id="timeline" vis-timeline data="model.timeline" options="model.timelineOptions" event="select" callback="onTimeLineCallback(params)" style="width: 100%"></div>
+		
 
 	</div>
 
 </div>
+
+<div id="timeline" vis-timeline data="model.timeline" options="model.timelineOptions" event="select" callback="onTimeLineCallback(params)" style="width: 100%"></div>
