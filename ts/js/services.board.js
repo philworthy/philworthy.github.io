@@ -150,7 +150,7 @@ TrelloScheduleApp.factory('BoardService', function() {
 				timelineGroups.push({
 					id: card.id,
 					content: card.name,
-					title: card.name
+					title: item.content = icard.name.substring(0,30)
 				});
 
 				// build timeline from actions
@@ -167,7 +167,6 @@ TrelloScheduleApp.factory('BoardService', function() {
 					else if(previousAction.type == "moveCardFromBoard") item.content = previousAction.data.boardTarget.name;
 					item.state = setStateType(item.content);
 					item.className = item.state;
-					item.content = item.content.substring(0,30);
 					item.duration = moment.duration((item.end-item.start), "milliseconds").humanize();
 					item.calendar = moment(previousAction.date).calendar();
 					return item;
