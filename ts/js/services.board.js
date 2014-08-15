@@ -32,8 +32,6 @@ TrelloScheduleApp.factory('BoardService', function() {
 				data: timeline,
 				groups: timelineGroups,
 				options: {
-					width: '100%',
-					height: 500,
 					showCurrentTime: true,
 					showMinorlabels: false,
 				    editable: false,
