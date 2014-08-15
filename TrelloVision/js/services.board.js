@@ -159,7 +159,7 @@ TrelloVisionApp.factory('BoardService', function() {
 						type: 'range', 
 						group: cardId, 
 						start: moment(previousAction.date).toDate(),
-						end: moment(endDate).toDate(),
+						end: moment(endDate).toDate()
 					}
 					if(previousAction.type == "createCard") item.content = previousAction.data.list.name;
 					else if(previousAction.type == "updateCard") item.content = previousAction.data.listAfter.name;
