@@ -99,7 +99,6 @@ TrelloVisionApp.factory('BoardService', function() {
 							var checkItem = checklist.checkItems[_ci];
 							var substrings = checkItem.name.split(":");
 							if(substrings.length!=2) continue;
-							var item = null;
 							var str0 = substrings[0].toLowerCase();
 							if (str0.match(/^(.*est.*|.*dur.*|.*effort.*)$/)) {
 								var str1 = substrings[0].replace(" ","");
