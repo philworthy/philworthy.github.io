@@ -38,7 +38,8 @@ TrelloScheduleApp.factory('BoardService', function() {
 				showMinorlabels: false,
 			    editable: false,
 			    stack: true,
-			    zoomable: true
+			    zoomable: true,
+			    groupOrder: 'content'
 			};
 
 			var maps = {
