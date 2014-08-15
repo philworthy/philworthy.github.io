@@ -39,10 +39,8 @@ angular.module('angular.vistimeline', []).directive('visTimeline', [function() {
     link: function(scope, element, attrs) {        
     var container = element[0], buildGraph = function(scope) {
         var graph = null;
-        graph = new vis.Timeline(container);
-        graph.setOptions(scope.options);
+        graph = new vis.Timeline(container, scope.data, scope.options);
         graph.setGroups(scope.groups);
-        graph.setItems(scope.data);
           return graph.on(scope.event, function(properties) {
             if (properties.length !== 0) { 
               scope.callback({params: properties});
