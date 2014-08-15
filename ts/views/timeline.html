@@ -14,4 +14,4 @@
 
 </div>
 
-<div id="timeline" vis-timeline data="model.timeline" options="model.timelineOptions" event="select" callback="onTimeLineCallback(params)" style="width: 100%"></div>
+<div ng-show="model.ready" id="timeline" vis-timeline data="model.timeline" options="model.timelineOptions" event="select" callback="onTimeLineCallback(params)" style="width: 100%"></div>
