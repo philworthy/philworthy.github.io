@@ -28,18 +28,19 @@ TrelloScheduleApp.factory('BoardService', function() {
 
 			var timeline = [];
 			var timelineGroups = [];
-			scope.model.timeline = {};
-			scope.model.timeline.data = timeline;
-			scope.model.timeline.groups = timelineGroups;
-			scope.model.timeline.options = {
-				width: '100%',
-				height: '100%',
-				showCurrentTime: true,
-				showMinorlabels: false,
-			    editable: false,
-			    stack: true,
-			    zoomable: true,
-			    groupOrder: 'content'
+			scope.model.timeline = {
+				data: timeline,
+				groups: timelineGroups,
+				options: {
+					width: '100%',
+					height: '100%',
+					showCurrentTime: true,
+					showMinorlabels: false,
+				    editable: false,
+				    stack: true,
+				    zoomable: true,
+				    //groupOrder: 'content'
+				}
 			};
 
 			var maps = {
