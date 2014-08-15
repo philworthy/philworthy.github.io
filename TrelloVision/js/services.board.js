@@ -104,7 +104,7 @@ TrelloVisionApp.factory('BoardService', function() {
 								var str1 = substrings[1].replace(/\s+/,"");
 								var str1 = str1.match(/^(\d+)(\w+)$/);
 								if(!str1 || str1.length!=3) continue;
-								var date = moment.duration(str1[1],str1[2]);
+								var date = moment.duration(parseFloat(str1[1]),str1[2]);
 								var item = {
 									name: substrings[0],
 									type: 'duration',
