@@ -44,17 +44,6 @@ TrelloVisionApp.factory('BoardService', function() {
 				cards: {}
 			}
 
-			// helper function
-			var setStateType = function(_s) {
-				var str = _s.toLowerCase();
-				if (str.match(/^(.*in[ -]?box.*|.*backlog.*|.*discussion.*|.*moth.*|.*ice.*|.*frozen.*)$/)) return "inactive"
-				else if (str.match(/^(.*prioritised.*|.*prioritized.*|.*ready.*|.*to[ -]?do.*|.*ready.*|.*waiting.*|.*pending.*|.*blocked.*)$/)) return "waiting"
-				else if (str.match(/^(.*doing.*|.*progress.*|.*development.*)$/)) return "doing"
-				else if (str.match(/^(.*qa.*|.*test.*|.*review.*)$/)) return "testing"
-				else if (str.match(/^(.*done.*|.*release.*|.*ship.*|.*roll.*)$/)) return "done"
-				return "inactive";
-			}
-
 			// build map of lists
 			for(var _l in data.lists) {
 				var list = data.lists[_l];
@@ -190,31 +179,31 @@ TrelloVisionApp.factory('BoardService', function() {
 				}
 
 				// build progressBar from actions
-				var buildProgressBarItem = function(timeRangeItem, startEndRange) {
-					var duration = timeRangeItem.end-timeRangeItem.start;
-					var item = {
-						state: setStateType(timeRangeItem.content), 
-						value: duration/startEndRange*100,
-						duration: moment.duration(duration, "milliseconds").humanize(),
-						name: timeRangeItem.content
-					}
-					return item;
-				};
-				card.progressBar = [];
-				var progressBarMin = null;
-				var progressBarMax = null;
-				for(var _t in card.timeline) {
-					var item = card.timeline[_t];
-					if(!progressBarMin) progressBarMin = item.start;
-					else if(item.start < progressBarMin) progressBarMin = item.start;
-					if(!progressBarMax) progressBarMax = item.end;
-					else if(item.end > progressBarMax) progressBarMax = item.end;
-				}
-				var startEndRange = progressBarMax - progressBarMin;
-				for(var _t in card.timeline) {
-					var item = card.timeline[_t];
-					card.progressBar.push(buildProgressBarItem(item, startEndRange));
-				}
+				// var buildProgressBarItem = function(timeRangeItem, startEndRange) {
+				// 	var duration = timeRangeItem.end-timeRangeItem.start;
+				// 	var item = {
+				// 		state: setStateType(timeRangeItem.content), 
+				// 		value: duration/startEndRange*100,
+				// 		duration: moment.duration(duration, "milliseconds").humanize(),
+				// 		name: timeRangeItem.content
+				// 	}
+				// 	return item;
+				// };
+				// card.progressBar = [];
+				// var progressBarMin = null;
+				// var progressBarMax = null;
+				// for(var _t in card.timeline) {
+				// 	var item = card.timeline[_t];
+				// 	if(!progressBarMin) progressBarMin = item.start;
+				// 	else if(item.start < progressBarMin) progressBarMin = item.start;
+				// 	if(!progressBarMax) progressBarMax = item.end;
+				// 	else if(item.end > progressBarMax) progressBarMax = item.end;
+				// }
+				// var startEndRange = progressBarMax - progressBarMin;
+				// for(var _t in card.timeline) {
+				// 	var item = card.timeline[_t];
+				// 	card.progressBar.push(buildProgressBarItem(item, startEndRange));
+				// }
 
 				// build timeline from schedule
 				for(var _s in card.schedule) {
@@ -308,3 +297,16 @@ TrelloVisionApp.factory('BoardService', function() {
 
 	return svc;
 });
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+/*----------------------------------------------------------------------------------------------------*/
+var setStateType = function(_s) {
+	var str = _s.toLowerCase();
+	if (str.match(/^(.*in[ -]?box.*|.*backlog.*|.*discussion.*|.*moth.*|.*ice.*|.*frozen.*)$/)) return "inactive"
+	else if (str.match(/^(.*prioritised.*|.*prioritized.*|.*ready.*|.*to[ -]?do.*|.*ready.*|.*waiting.*|.*pending.*|.*blocked.*)$/)) return "waiting"
+	else if (str.match(/^(.*doing.*|.*progress.*|.*development.*)$/)) return "doing"
+	else if (str.match(/^(.*qa.*|.*test.*|.*review.*)$/)) return "testing"
+	else if (str.match(/^(.*done.*|.*release.*|.*ship.*|.*roll.*)$/)) return "done"
+	return "inactive";
+}
