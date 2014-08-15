@@ -45,8 +45,8 @@ function buildRoutes($routeProvider) {
 			templateUrl: 'views/board.html',
 			controller: BoardCtrl
 		})
-		.when('/board-timeline/:boardId', {
-			templateUrl: 'views/board-timeline.html',
+		.when('/timeline/:boardId', {
+			templateUrl: 'views/timeline.html',
 			controller: BoardCtrl
 		})
 		.otherwise({
