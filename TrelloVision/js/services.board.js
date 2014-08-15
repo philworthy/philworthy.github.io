@@ -98,32 +98,34 @@ TrelloVisionApp.factory('BoardService', function() {
 						for(var _ci in checklist.checkItems) {
 							var checkItem = checklist.checkItems[_ci];
 							var substrings = checkItem.name.split(":");
-							if(substrings.length==2) {
-								var item = null;
-								var str = substrings[0].toLowerCase();
-								if (str.match(/^(.*est.*|.*dur.*|.*effort.*)$/)) {
-									var date = moment.duration(substrings[1]);
-									var item = {
-										name: substrings[0],
-										type: 'duration',
-										state: getItemState(substrings[0]),
-										date: date,
-										nameDate: substrings[0] + ': ' + date.humanize()
-									};
-									card.schedule.push(item);
-								} else {
-									var year = moment().year();
-									var date = moment(substrings[1]);
-									date.year(year);
-									var item = {
-										name: substrings[0],
-										type: 'date',
-										state: getItemState(substrings[0]),
-										date: date,
-										nameDate: substrings[0] + ': ' + date.format('MMM D')
-									};
-									card.schedule.push(item);
-								}
+							if(substrings.length!=2) continue;
+							var item = null;
+							var str0 = substrings[0].toLowerCase();
+							if (str0.match(/^(.*est.*|.*dur.*|.*effort.*)$/)) {
+								var str1 = substrings[0].replace(" ","");
+								str1.split(/^(\d+(?:\.\d+)?)(.*)$/);
+								if(str1.length!=2) continue;
+								var date = moment.duration(str1[0],str1[1]);
+								var item = {
+									name: substrings[0],
+									type: 'duration',
+									state: getItemState(substrings[0]),
+									date: date,
+									nameDate: substrings[0] + ': ' + date.humanize()
+								};
+								card.schedule.push(item);
+							} else {
+								var year = moment().year();
+								var date = moment(substrings[1]);
+								date.year(year);
+								var item = {
+									name: substrings[0],
+									type: 'date',
+									state: getItemState(substrings[0]),
+									date: date,
+									nameDate: substrings[0] + ': ' + date.format('MMM D')
+								};
+								card.schedule.push(item);
 							}
 						}
 					}
