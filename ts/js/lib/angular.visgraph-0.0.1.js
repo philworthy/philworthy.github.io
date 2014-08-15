@@ -40,7 +40,7 @@ angular.module('angular.vistimeline', []).directive('visTimeline', [function() {
     var container = element[0], buildGraph = function(scope) {
         var graph = null;
         graph = new vis.Timeline(container, scope.data, scope.options);
-        //graph.setGroups(scope.groups);
+        graph.setGroups(scope.groups);
           return graph.on(scope.event, function(properties) {
             if (properties.length !== 0) { 
               scope.callback({params: properties});
