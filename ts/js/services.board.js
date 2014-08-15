@@ -30,12 +30,12 @@ TrelloScheduleApp.factory('BoardService', function() {
 			scope.model.timeline = timeline;
 			scope.model.timelineOptions = {
 				width: '100%',
-				height: '100%',
+				height: 500,
 				showCurrentTime: true,
 				showMinorlabels: false,
 			    editable: false,
-			    stack: false,
-			    zoomable: false
+			    stack: true,
+			    zoomable: true
 			};
 
 			var maps = {
