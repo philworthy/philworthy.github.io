@@ -1,5 +1,5 @@
 
-var TrelloVisionVersion = "0.2.1.9ea9c39";
+var TrelloScheduleVersion = "0.1";
 var HashTagPattern = /([\s">\[\{}])(#)([a-zA-Z][\w\-]*)/g;
 
 
@@ -8,7 +8,7 @@ var HashTagPattern = /([\s">\[\{}])(#)([a-zA-Z][\w\-]*)/g;
 function trelloAuth(onSuccess, onError) {
 	var opt = {
 		type: "redirect",
-		name: "Livestream Trello Manager",
+		name: "Trello Schedule",
 		scope: { read: true },
 		success: onSuccess,
 		expiration : "never",

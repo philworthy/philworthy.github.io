@@ -2,7 +2,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*----------------------------------------------------------------------------------------------------*/
-TrelloVisionApp.factory('ListCardTableService', function() {
+TrelloScheduleApp.factory('ListCardTableService', function() {
 
 	var svc = {};
 

@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en" ng-app="TrelloVision">
+<html lang="en" ng-app="TrelloSchedule">
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<meta charset="utf-8">
-	<title>Trello Manager</title>
+	<title>Trello Schedule</title>
 
 	<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script src="https://api.trello.com/1/client.js?key=19389bbf8f9e60a3d5d7f64547f03e1f"></script>
@@ -15,7 +15,7 @@
 	<script src="js/lib/moment-with-locales.min.js"></script>
 	<script src="js/lib/markdown.converter.js"></script>
 
-	<script src="js/trelloVision.js"></script>
+	<script src="js/trelloSchedule.js"></script>
 	<script src="js/services.js"></script>
 	<script src="js/services.trelloDataService.js"></script>
 	<script src="js/services.cardTable.js"></script>
@@ -44,7 +44,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Trello Manager</a>
+          <a class="navbar-brand" href="#">Trello Schedule</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav" ng-repeat="mod in model.modules" ng-cloak ng-show="model.ready">

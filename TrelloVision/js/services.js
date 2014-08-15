@@ -1,9 +1,9 @@
 
-var TrelloVisionApp = angular
-	.module('TrelloVision', ['ngRoute', 'ngResource', 'ui.bootstrap', 'angular.vistimeline'])
+var TrelloScheduleApp = angular
+	.module('TrelloSchedule', ['ngRoute', 'ngResource', 'ui.bootstrap', 'angular.vistimeline'])
 	.config(['$routeProvider', buildRoutes]);
 
-var TrelloVisionModules = [
+var TrelloScheduleModules = [
 	{ name: 'Overview', uri: '/overview' },
 	{ name: 'QA Cards', uri: '/listcardtable' }
 ];

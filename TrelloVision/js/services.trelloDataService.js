@@ -2,7 +2,7 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*----------------------------------------------------------------------------------------------------*/
-TrelloVisionApp.factory('TrelloDataService', function() {
+TrelloScheduleApp.factory('TrelloDataService', function() {
 	var svc = { };
 
 	var model = {

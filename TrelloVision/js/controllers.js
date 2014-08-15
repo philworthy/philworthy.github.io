@@ -3,14 +3,14 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*----------------------------------------------------------------------------------------------------*/
 function LayoutCtrl($scope, $location, $window) {
-	for ( i in TrelloVisionModules ) {
-		var mod = TrelloVisionModules[i];
+	for ( i in TrelloScheduleModules ) {
+		var mod = TrelloScheduleModules[i];
 		mod.selected = (mod.uri == $location.path() ? 'selected' : '');
 	}
 
 	$scope.model = {
-		modules: TrelloVisionModules,
-		version: TrelloVisionVersion,
+		modules: TrelloScheduleModules,
+		version: TrelloScheduleVersion,
 		ready: true
 	};
 }
