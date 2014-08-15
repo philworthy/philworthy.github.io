@@ -2,7 +2,7 @@
 	<p>Loading Trello data, please wait...</p>
 </div>
 
-<div ng-show="model.ready">
+<!-- <div ng-show="model.ready">
 	
 	<div >
 		<h3>Timeline for the "{{model.data.name}}" Board</h3>
@@ -12,6 +12,6 @@
 
 	</div>
 
-</div>
+</div> -->
 
 <div ng-show="model.ready" id="timeline" vis-timeline data="model.timeline" options="model.timelineOptions" event="select" callback="onTimeLineCallback(params)" style="width: 100%"></div>
