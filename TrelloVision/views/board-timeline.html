@@ -1,0 +1,15 @@
+<div ng-cloak ng-show="!model.ready">
+	<p>Loading Trello data, please wait...</p>
+</div>
+
+<div ng-show="model.ready">
+	
+	<div >
+		<h3>Timeline for the "{{model.data.name}}" Board</h3>
+		<br/>
+
+		<div id="timeline" vis-timeline data="model.timeline" options="model.timelineOptions"></div>
+
+	</div>
+
+</div>

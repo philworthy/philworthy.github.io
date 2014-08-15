@@ -18,6 +18,7 @@
 	
 	<div >
 		<h3>Cards for the "{{model.data.name}}" Board</h3>
+		<p><a href="#/board/timeline/{{board.id}}" target="_self">View as timeline</a></p>
 		<br/>
 
 		<ul ng-repeat="card in model.data.cards | filter:onFilter(search) | orderBy:sortProp:sortRev">
