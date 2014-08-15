@@ -24,9 +24,8 @@
 		<ul ng-repeat="card in model.data.cards | filter:onFilter(search) | orderBy:sortProp:sortRev">
 			<li>
 				<h4><span ng-class="{'inactive':'label label-default', 'waiting':'label label-warning', 'doing':'label label-primary', 'testing':'label label-danger', 'done':'label label-success'}[card.state]">{{card.list.name}}</span><a href="{{card.url}}" target="_blank" tooltip-html-unsafe="{{card.descHtml}}" tooltip-trigger="mouseenter"> {{card.name}}</a></h4>
-				<p><span ng-repeat="item in card.timeline | filter:{type:'range'} | orderBy:'-start' | limitTo: 1">'{{item.content}}' since {{item.calendar}} ({{item.duration}})</span></p>
-				<p>Schedule: <span ng-repeat="schedule in card.schedule">{{schedule.nameDate}} &raquo; </span><span ng-hide="card.dueDate == null">Due: {{card.dueDate}}</span></p>
-				<p><small>4History: <span ng-repeat="item in card.timeline | filter:{type:'range'}">'{{item.content}}' for {{item.duration}}, {{item.calendar}} &raquo; </span></small></p>
+				<p><span ng-repeat="item in card.timeline | filter:{type:'range'} | orderBy:'-start' | limitTo: 1">Since {{item.calendar}} ({{item.duration}}) &raquo; (</span><span ng-repeat="schedule in card.schedule">{{schedule.nameDate}} &raquo; </span><span ng-hide="card.dueDate == null">Due: {{card.dueDate}}</span>)</p>
+				<p><small>History: <span ng-repeat="item in card.timeline | filter:{type:'range'}">'{{item.content}}' for {{item.duration}}, {{item.calendar}} &raquo; </span></small></p>
 				<br/>
 
 				<!-- <button popover="I appeared on mouse enter!" popover-trigger="mouseenter" class="btn btn-default">Mouseenter</button> -->
