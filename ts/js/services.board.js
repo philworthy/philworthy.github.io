@@ -37,7 +37,7 @@ TrelloScheduleApp.factory('BoardService', function() {
 					showCurrentTime: true,
 					showMinorlabels: false,
 				    editable: false,
-				    stack: true,
+				    stack: false,
 				    zoomable: true,
 				    groupOrder: 'content'
 				}
