@@ -101,7 +101,7 @@ TrelloVisionApp.factory('BoardService', function() {
 							if(substrings.length!=2) continue;
 							var str0 = substrings[0].toLowerCase();
 							if (str0.match(/^(.*est.*|.*dur.*|.*effort.*)$/)) {
-								var str1 = substrings[0].replace(" ","");
+								var str1 = substrings[1].replace(" ","");
 								str1.split(/^(\d+(?:\.\d+)?)(.*)$/);
 								if(str1.length!=2) continue;
 								var date = moment.duration(str1[0],str1[1]);
