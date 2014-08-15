@@ -27,10 +27,12 @@ TrelloScheduleApp.factory('BoardService', function() {
 			var data = scope.model.data;
 
 			var timeline = [];
-			scope.model.timeline = timeline;
-			scope.model.timelineOptions = {
+			var timelineGroups = [];
+			scope.model.timeline.data = timeline;
+			scope.model.timeline.groups = timelineGroups;
+			scope.model.timeline.options = {
 				width: '100%',
-				height: 500,
+				height: '100%',
 				showCurrentTime: true,
 				showMinorlabels: false,
 			    editable: false,
@@ -41,7 +43,8 @@ TrelloScheduleApp.factory('BoardService', function() {
 			var maps = {
 				lists: {},
 				members: {},
-				cards: {}
+				cards: {},
+				timelineGroups: {}
 			}
 
 			// build map of lists
@@ -141,6 +144,13 @@ TrelloScheduleApp.factory('BoardService', function() {
 				    stack: false,
 				    zoomable: false
 				};
+
+				// build timeline group for card
+				timelineGroups.push({
+					id: card.id,
+					content: card.name,
+					title: card.name
+				});
 
 				// build timeline from actions
 				var buildTimeRangeItem = function(cardId, previousAction, endDate) {
