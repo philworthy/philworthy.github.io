@@ -28,6 +28,7 @@ TrelloScheduleApp.factory('BoardService', function() {
 
 			var timeline = [];
 			var timelineGroups = [];
+			scope.model.timeline = {};
 			scope.model.timeline.data = timeline;
 			scope.model.timeline.groups = timelineGroups;
 			scope.model.timeline.options = {
