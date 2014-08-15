@@ -32,6 +32,29 @@
   	<script src="http://visjs.org/dist/vis.js"></script>
   	<script src="js/lib/angular.visgraph-0.0.1.js"></script>
 
+  	<style>
+	  .vis.timeline .inactive {
+	    border-color: gray;
+	    background-color: gray;
+	  }
+	  .vis.timeline .waiting {
+	    border-color: orange;
+	    background-color: orange;
+	  }
+	  .vis.timeline .doing {
+	    border-color: blue;
+	    background-color: blue;
+	  }
+	  .vis.timeline .testing {
+	    border-color: red;
+	    background-color: red;
+	  }
+	  .vis.timeline .done {
+	    border-color: green;
+	    background-color: green;
+	  }
+	</style>
+
 </head>
 <body ng-controller="LayoutCtrl" role="document">
 
