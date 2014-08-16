@@ -150,7 +150,7 @@ TrelloScheduleApp.factory('BoardService', function() {
 				timelineGroups.push({
 					id: card.id,
 					content: card.name,
-					title: icard.name.substring(0,30)
+					title: card.name.substring(0,30)
 				});
 
 				// build timeline from actions
