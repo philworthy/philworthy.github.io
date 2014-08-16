@@ -149,8 +149,8 @@ TrelloScheduleApp.factory('BoardService', function() {
 				// build timeline group for card
 				timelineGroups.push({
 					id: card.id,
-					content: card.name,
-					title: card.name.substring(0,30)
+					content: card.name.substring(0,30),
+					title: card.name
 				});
 
 				// build timeline from actions
