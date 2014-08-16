@@ -160,7 +160,7 @@ TrelloScheduleApp.factory('BoardService', function() {
 					content: card.name.substring(0,30) + '..',
 					title: card.name,
 					state: setStateType(card.list.name),
-					order: getStateOrder(card.state)
+					order: getStateOrder(card.state) + card.due
 				});
 
 				// build timeline from actions
