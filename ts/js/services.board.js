@@ -39,7 +39,7 @@ TrelloScheduleApp.factory('BoardService', function() {
 				    editable: false,
 				    stack: false,
 				    zoomable: true,
-				    groupOrder: 'content',
+				    groupOrder: 'state',
 				    autoResize: false,
 				    orientation: 'top',
 				    padding: 2
