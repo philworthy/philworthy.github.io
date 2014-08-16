@@ -235,7 +235,7 @@ TrelloScheduleApp.factory('BoardService', function() {
 						content: s.name,
 						type: 'point', 
 						group: card.id, 
-						start: s.date.toDate()
+						start: s.date.startOf('day').toDate()
 					};
 					card.timeline.push(timelineItem);
 					timeline.push(timelineItem);
@@ -248,7 +248,7 @@ TrelloScheduleApp.factory('BoardService', function() {
 						content: 'Due',
 						type: 'point', 
 						group: card.id, 
-						start: moment(card.due).toDate()
+						start: moment(card.due).startOf('day').toDate()
 					};
 					card.timeline.push(timelineItem);
 					timeline.push(timelineItem);
