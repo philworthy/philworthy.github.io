@@ -332,10 +332,10 @@ var setStateType = function(_s) {
 	return "inactive";
 }
 var getStateOrder = function(_s) {
-	if(_s='inactive') return 4
-	else if(_s='waiting') return 3
-	else if(_s='doing') return 2
-	else if(_s='testing') return 1
-	else if(_s='done') return 0
+	if(_s=='inactive') return 4
+	else if(_s=='waiting') return 3
+	else if(_s=='doing') return 2
+	else if(_s=='testing') return 1
+	else if(_s=='done') return 0
 	else return 0;
 }
