@@ -35,6 +35,7 @@ TrelloScheduleApp.factory('BoardService', function() {
 					width: '100%',
 					height: 500,
 					showCurrentTime: true,
+					showMajorlabels: true,
 					showMinorlabels: true,
 				    editable: false,
 				    stack: false,
@@ -45,6 +46,7 @@ TrelloScheduleApp.factory('BoardService', function() {
 				    padding: 2,
 				    zoomMin: 1209600000,
 				    zoomMax: 7884000000,
+				    start: moment().toDate()
 				}
 			};
 
