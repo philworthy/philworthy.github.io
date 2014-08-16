@@ -33,11 +33,14 @@ TrelloScheduleApp.factory('BoardService', function() {
 				groups: timelineGroups,
 				options: {
 					showCurrentTime: true,
-					showMinorlabels: false,
+					showMinorlabels: true,
 				    editable: false,
 				    stack: false,
 				    zoomable: true,
-				    groupOrder: 'content'
+				    groupOrder: 'content',
+				    autoResize: false,
+				    orientation: 'top',
+				    padding: 2
 				}
 			};
 
