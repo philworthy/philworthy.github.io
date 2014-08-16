@@ -39,7 +39,7 @@ TrelloScheduleApp.factory('BoardService', function() {
 				    editable: false,
 				    stack: false,
 				    zoomable: true,
-				    groupOrder: 'state',
+				    groupOrder: 'className',
 				    autoResize: false,
 				    orientation: 'top',
 				    padding: 2,
@@ -173,8 +173,7 @@ TrelloScheduleApp.factory('BoardService', function() {
 					else if(previousAction.type == "updateCard") item.content = previousAction.data.listAfter.name;
 					else if(previousAction.type == "moveCardToBoard") item.content = previousAction.data.list.name; 
 					else if(previousAction.type == "moveCardFromBoard") item.content = previousAction.data.boardTarget.name;
-					item.state = setStateType(item.content);
-					item.className = item.state;
+					item.className = setStateType(item.content);
 					item.duration = moment.duration((item.end-item.start), "milliseconds").humanize();
 					item.calendar = moment(previousAction.date).calendar();
 					return item;
