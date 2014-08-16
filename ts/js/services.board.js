@@ -157,7 +157,7 @@ TrelloScheduleApp.factory('BoardService', function() {
 				// build timeline group for card
 				timelineGroups.push({
 					id: card.id,
-					content: card.name.substring(0,30),
+					content: getStateOrder(card.state) + card.name.substring(0,30),
 					title: card.name,
 					state: setStateType(card.list.name),
 					order: getStateOrder(card.state)
@@ -332,25 +332,10 @@ var setStateType = function(_s) {
 	return "inactive";
 }
 var getStateOrder = function(_s) {
-	var str = _s.toLowerCase();
-	switch(_s) {
-		case 'inactive':
-		return 4;
-		break;
-		case 'waiting':
-		return 3;
-		break;
-		case 'doing':
-		return 2;
-		break;
-		case 'testing':
-		return 1;
-		break;
-		case 'done':
-		return 0;
-		break;
-		default:
-		return 0;
-		break;
-	}
+	if(_s='inactive') return 4
+	else if(_s='waiting') return 3
+	else if(_s='doing') return 2
+	else if(_s='testing') return 1
+	else if(_s='done') return 0
+	else return 0;
 }
