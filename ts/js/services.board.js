@@ -42,7 +42,9 @@ TrelloScheduleApp.factory('BoardService', function() {
 				    groupOrder: 'state',
 				    autoResize: false,
 				    orientation: 'top',
-				    padding: 2
+				    padding: 2,
+				    zoomMin: 1209600000,
+				    zoomMax: 7884000000,
 				}
 			};
 
