@@ -157,7 +157,7 @@ TrelloScheduleApp.factory('BoardService', function() {
 				// build timeline group for card
 				timelineGroups.push({
 					id: card.id,
-					content: card.name.substring(0,30) + '..',
+					content: getStateOrder(card.state) + "-" + card.name.substring(0,30) + '..',
 					title: card.name,
 					state: setStateType(card.list.name),
 					order: getStateOrder(card.state) + "-" + card.due
