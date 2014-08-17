@@ -35,7 +35,7 @@ TrelloScheduleApp.factory('BoardsService', function() {
 		TrelloDataService.loadMultiData(scope, requests, function(scope) {
 
 			for(request in requests) {
-				var response = scope.model[request.proprtyName];
+				var response = scope.model[request.propertyName];
 				if(response) {
 					initTimeline(scope.model);
 					parseBoard(scope.model, response)
