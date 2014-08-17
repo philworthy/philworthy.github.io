@@ -23,7 +23,10 @@ TrelloScheduleApp.factory('BoardService', function() {
 		};
 
 		TrelloDataService.loadData(scope, 'boards/'+routeParams.boardId, params, function(scope) {
-			parseBoard(scope);
+
+			initTimeline(scope.model);
+			parseBoard(scope.model, scope.model.data);
+
 			if ( afterBuildCardTable ) {
 				afterBuildCardTable(scope);
 			}
@@ -91,14 +94,11 @@ TrelloScheduleApp.factory('BoardService', function() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*----------------------------------------------------------------------------------------------------*/
-function parseBoard(scope) {
-	var data = scope.model.data;
+function initTimeline(model) {
 
-	var timeline = [];
-	var timelineGroups = [];
-	scope.model.timeline = {
-		data: timeline,
-		groups: timelineGroups,
+	model.timeline = {
+		data: []],
+		groups: []],
 		options: {
 			width: '100%',
 			showCurrentTime: true,
@@ -116,12 +116,14 @@ function parseBoard(scope) {
 		    start: moment().toDate()
 		}
 	};
+}
+
+function parseBoard(model, data) {
 
 	var maps = {
 		lists: {},
 		members: {},
-		cards: {},
-		timelineGroups: {}
+		cards: {}
 	}
 
 	// build map of lists
@@ -224,7 +226,7 @@ function parseBoard(scope) {
 
 		// build timeline group for card
 		var groupDisplayName = (card.name.length>30) ? card.name.substring(0,30)+".." : card.name;
-		timelineGroups.push({
+		model.timeline.groups.push({
 			id: card.id,
 			content: '<a href="'+card.url+'" target="_blank">'+groupDisplayName+'</a>',
 			title: card.name,
@@ -257,14 +259,14 @@ function parseBoard(scope) {
 			if(previousAction) {
 				var timeRangeItem = buildTimeRangeItem(card.id, previousAction, action.date);
 				card.timeline.push(timeRangeItem);
-				timeline.push(timeRangeItem);
+				model.timeline.data.push(timeRangeItem);
 			}
 			previousAction = action;
 		}
 		if(previousAction) {
 			var timeRangeItem = buildTimeRangeItem(card.id, previousAction, moment().toDate());
 			card.timeline.push(timeRangeItem);
-			timeline.push(timeRangeItem);
+			model.timeline.data.push(timeRangeItem);
 		}
 
 		// build progressBar from actions
@@ -306,7 +308,7 @@ function parseBoard(scope) {
 				start: s.date.startOf('day').toDate()
 			};
 			card.timeline.push(timelineItem);
-			timeline.push(timelineItem);
+			model.timeline.data.push(timelineItem);
 		}
 
 		// build timeline from due date
@@ -319,7 +321,7 @@ function parseBoard(scope) {
 				start: moment(card.due).startOf('day').toDate()
 			};
 			card.timeline.push(timelineItem);
-			timeline.push(timelineItem);
+			model.timeline.data.push(timelineItem);
 		}
 	}
 }
