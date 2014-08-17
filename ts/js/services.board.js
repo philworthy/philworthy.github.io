@@ -158,6 +158,7 @@ TrelloScheduleApp.factory('BoardService', function() {
 				timelineGroups.push({
 					id: card.id,
 					content: getStateOrder(card.state) + "-" + card.state + ": " + card.name.substring(0,30) + '..',
+					content: '<a href="{{'+card.url+'}}" target="_blank">{{'+(card.name.length>30?:card.name.substring(0,30)+"…":card.name)+'}}</a>',
 					title: card.name,
 					order: getStateOrder(card.state) + "-" + card.due
 				});
