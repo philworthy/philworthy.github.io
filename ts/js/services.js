@@ -43,7 +43,7 @@ function buildRoutes($routeProvider) {
 			controller: OverviewCtrl
 		})
 		.when('/boards', {
-			templateUrl: 'views/boards.html',
+			templateUrl: 'views/timeline.html',
 			controller: BoardsCtrl
 		})
 		.when('/board/:boardId', {
