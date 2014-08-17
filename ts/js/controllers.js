@@ -53,3 +53,8 @@ function BoardCtrl($scope, $routeParams, BoardService, TrelloDataService) {
 	BoardService.loadData(TrelloDataService, $scope, $routeParams);
 	$scope.model = TrelloDataService.model();
 }
+/*----------------------------------------------------------------------------------------------------*/
+function BoardsCtrl($scope, $routeParams, BoardsService, TrelloDataService) {
+	BoardsService.loadData(TrelloDataService, $scope, $routeParams);
+	$scope.model = TrelloDataService.model();
+}

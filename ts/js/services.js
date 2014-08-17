@@ -5,6 +5,7 @@ var TrelloScheduleApp = angular
 
 var TrelloScheduleModules = [
 	{ name: 'Overview', uri: '/overview' },
+	{ name: 'Boards', uri: '/boards' },
 	{ name: 'QA Cards', uri: '/listcardtable' }
 ];
 
@@ -40,6 +41,10 @@ function buildRoutes($routeProvider) {
 		.when('/board', {
 			templateUrl: 'views/overview.html',
 			controller: OverviewCtrl
+		})
+		.when('/boards', {
+			templateUrl: 'views/board.html',
+			controller: BoardsCtrl
 		})
 		.when('/board/:boardId', {
 			templateUrl: 'views/board.html',
