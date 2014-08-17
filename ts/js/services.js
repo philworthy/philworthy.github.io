@@ -5,8 +5,7 @@ var TrelloScheduleApp = angular
 
 var TrelloScheduleModules = [
 	{ name: 'Overview', uri: '/overview' },
-	{ name: 'Boards', uri: '/boards' },
-	{ name: 'QA Cards', uri: '/listcardtable' }
+	{ name: 'All boards', uri: '/boards' }
 ];
 
 
