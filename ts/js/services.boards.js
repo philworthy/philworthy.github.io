@@ -23,13 +23,13 @@ TrelloScheduleApp.factory('BoardsService', function() {
 		};
 
 		var requests = [
-			{cmd: 'boards/53cc8a212249440d4b1dcede', ds: params, propName: 'bugs'},
-			{cmd: 'boards/53d6d8d08fae1976ba265b31', ds: params, propName: 'flash player'},
-			{cmd: 'boards/53cff888a3cc3fa2f1f5540f', ds: params, propName: 'html player'},
-			{cmd: 'boards/53caddba45ffa359beb1cf9a', ds: params, propName: 'mobile'},
-			{cmd: 'boards/4fe9828c6b88d0c66f40ac32', ds: params, propName: 'node api'},
-			{cmd: 'boards/53847c6e402857b8fda7c759', ds: params, propName: 'web'},
-			{cmd: 'boards/50065e1b7ade9ac46152a395', ds: params, propName: 'workflow'}
+			{apiCommand: 'boards/53cc8a212249440d4b1dcede', dataSets: params, propertyName: 'bugs'},
+			{apiCommand: 'boards/53d6d8d08fae1976ba265b31', dataSets: params, propertyName: 'flash player'},
+			{apiCommand: 'boards/53cff888a3cc3fa2f1f5540f', dataSets: params, propertyName: 'html player'},
+			{apiCommand: 'boards/53caddba45ffa359beb1cf9a', dataSets: params, propertyName: 'mobile'},
+			{apiCommand: 'boards/4fe9828c6b88d0c66f40ac32', dataSets: params, propertyName: 'node api'},
+			{apiCommand: 'boards/53847c6e402857b8fda7c759', dataSets: params, propertyName: 'web'},
+			{apiCommand: 'boards/50065e1b7ade9ac46152a395', dataSets: params, propertyName: 'workflow'}
 		];
 
 		TrelloDataService.loadMultiData(scope, requests, function(scope) {
