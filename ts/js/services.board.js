@@ -213,6 +213,9 @@ function parseBoard(model, data) {
 	// build timeline and progress bar
 	for(var _c in data.cards) {
 		var card = data.cards[_c];
+
+		if(getStateOrder(card.state)==4) return; // do not show inactive cards
+
 		card.timeline = [];
 
 		card.timelineOptions = {
