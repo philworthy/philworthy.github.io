@@ -41,61 +41,6 @@ TrelloScheduleApp.factory('BoardsService', function() {
 				afterBuildCardTable(scope);
 			}
 		});
-
-		scope.model = TrelloDataService.model();
-		scope.model.ready = false;
-		scope.model.table = null;
-
-		scope.search = {};
-
-		if ( routeParams.fl ) {
-			scope.search.list = routeParams.fl;
-		}
-
-		scope.sortProp = null;
-		scope.sortRev = false;
-
-		scope.onFilter = function(search) {
-			return function(item) {
-				if ( search.name ) {
-					if ( !isTextMatch(item.name, search.name) ) {
-						return false;
-					}
-				}
-
-				if ( search.list ) {
-					if ( !isTextMatch(item.listName, search.list) ) {
-						return false;
-					}
-				}
-
-				return true;
-			};
-		};
-		
-		scope.onSort = function(sortProp) {
-			if ( scope.sortProp == sortProp ) {
-				if ( scope.sortRev ) {
-					scope.sortProp = null;
-					scope.sortRev = false;
-					return;
-				}
-
-				scope.sortRev = true;
-				return;
-			}
-
-			scope.sortProp = sortProp;
-			scope.sortRev = false;
-		};
-
-		scope.descToHtml = function(desc, tagClass) {
-			if ( desc == null ) {
-				return null;
-			}
-
-			return descToHtml(desc, scope.model.table.board.id, tagClass);
-		};
 	};
 
 	return svc;
