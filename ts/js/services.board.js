@@ -214,7 +214,7 @@ function parseBoard(model, data) {
 	for(var _c in data.cards) {
 		var card = data.cards[_c];
 
-		if(card.state=='inactive') continue; // do not show inactive cards
+		if(card.state=='inactive' || card.state=='done') continue; // do not show inactive cards
 
 		card.timeline = [];
 
