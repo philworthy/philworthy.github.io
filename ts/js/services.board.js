@@ -97,8 +97,8 @@ TrelloScheduleApp.factory('BoardService', function() {
 function initTimeline(model) {
 
 	model.timeline = {
-		data: []],
-		groups: []],
+		data: [],
+		groups: [],
 		options: {
 			width: '100%',
 			showCurrentTime: true,
