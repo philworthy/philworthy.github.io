@@ -100,8 +100,6 @@ function initTimeline(model) {
 		data: [],
 		groups: [],
 		options: {
-			width: '100%',
-			height: 800,
 			showCurrentTime: true,
 			showMajorlabels: true,
 			showMinorlabels: true,
