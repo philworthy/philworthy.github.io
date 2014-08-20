@@ -175,7 +175,7 @@ function parseBoard(model, data) {
 					var substrings = checkItem.name.split(":");
 					if(substrings.length!=2) continue;
 					var str0 = substrings[0].toLowerCase();
-
+					var str1 = substrings[1].replace(/\s+/,"");
 					var date = chrono.parse(str1);
 					if(date) {
 						var item = {
