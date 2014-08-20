@@ -289,7 +289,7 @@ function buldTimelineFromActions(card, timelineData) {
 	}
 	if(previousAction) {
 		var timeRangeItem = buildTimeRangeItem(card.id, previousAction, moment().toDate());
-		timelineData(timeRangeItem);
+		timelineData.push(timeRangeItem);
 	}
 }
 /*----------------------------------------------------------------------------------------------------*/
