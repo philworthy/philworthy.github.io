@@ -183,7 +183,7 @@ function parseBoard(model, data) {
 							type: 'date',
 							state: getItemState(substrings[0]),
 							date: moment(date),
-							nameDate: substrings[0] + ': ' + date.format('MMM D')
+							nameDate: substrings[0] + ': ' + moment(date).format('MMM D')
 						};
 						card.schedule.dates.push(item);
 					} else {
