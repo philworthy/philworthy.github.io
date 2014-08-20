@@ -105,7 +105,7 @@ function initTimeline(model) {
 			showMinorlabels: true,
 		    editable: false,
 		    stack: false,
-		    zoomable: true,
+		    zoomable: false,
 		    groupOrder: 'order',
 		    autoResize: false,
 		    orientation: 'top',
@@ -161,7 +161,12 @@ function parseBoard(model, data) {
 			else if (str.match(/^(.*qa.*|.*test.*|.*review.*)$/)) return "testing"
 			return null;
 		}
-		card.schedule = [];
+
+		card.schedule = {
+			dates: [],
+			durations: {},
+			dependencies: []
+		};
 		for(var _cl in card.checklists) {
 			var checklist = card.checklists[_cl];
 			if(checklist.name.toLowerCase()=="schedule") {
@@ -170,7 +175,31 @@ function parseBoard(model, data) {
 					var substrings = checkItem.name.split(":");
 					if(substrings.length!=2) continue;
 					var str0 = substrings[0].toLowerCase();
-					if (str0.match(/^(.*est.*|.*dur.*|.*effort.*)$/)) {
+
+					var date = chrono.parse(str1);
+					if(date) {
+						var item = {
+							name: substrings[0],
+							type: 'date',
+							state: getItemState(substrings[0]),
+							date: moment(date),
+							nameDate: substrings[0] + ': ' + date.format('MMM D')
+						};
+						card.schedule.dates.push(item);
+					} else {
+						var duration = juration.parse(str1);
+						var item = {
+							name: substrings[0],
+							type: 'duration',
+							state: getItemState(substrings[0]),
+							date: moment.duration(duration,'s'),
+							nameDate: substrings[0] + ': ' + date.humanize()
+						};
+						card.schedule.durations[item.name] = item;
+					}
+
+
+					/*if (str0.match(/^(.*est.*|.*dur.*|.*effort.*)$/)) {
 						var str1 = substrings[1].replace(/\s+/,"");
 						var str1 = str1.match(/^(\d+)(\w+)$/);
 						if(!str1 || str1.length!=3) continue;
@@ -182,7 +211,7 @@ function parseBoard(model, data) {
 							date: date,
 							nameDate: substrings[0] + ': ' + date.humanize()
 						};
-						card.schedule.push(item);
+						card.schedule.durations[item.name] = item;
 					} else {
 						var year = moment().year();
 						var date = moment(substrings[1]);
@@ -194,8 +223,8 @@ function parseBoard(model, data) {
 							date: date,
 							nameDate: substrings[0] + ': ' + date.format('MMM D')
 						};
-						card.schedule.push(item);
-					}
+						card.schedule.dates.push(item);
+					}*/
 				}
 			}
 		}
@@ -226,109 +255,78 @@ function parseBoard(model, data) {
 		    zoomable: false
 		};
 
-		// build timeline group for card
-		var groupDisplayName = (card.name.length>30) ? card.name.substring(0,30)+".." : card.name;
-		model.timeline.groups.push({
-			id: card.id,
-			content: '<a href="'+card.url+'" target="_blank">'+groupDisplayName+'</a>',
-			title: card.name,
-			order: getStateOrder(card.state) + "-" + card.due
-		});
-
-		// build timeline from actions
-		var buildTimeRangeItem = function(cardId, previousAction, endDate) {
-			var item = {
-				type: 'range', 
-				group: cardId, 
-				start: moment(previousAction.date).toDate(),
-				end: moment(endDate).toDate()
-			}
-			if(previousAction.type == "createCard") item.content = previousAction.data.list.name;
-			else if(previousAction.type == "updateCard") item.content = previousAction.data.listAfter.name;
-			else if(previousAction.type == "moveCardToBoard") item.content = previousAction.data.list.name; 
-			else if(previousAction.type == "moveCardFromBoard") item.content = previousAction.data.boardTarget.name;
-			item.className = setStateType(item.content);
-			item.duration = moment.duration((item.end-item.start), "milliseconds").humanize();
-			item.calendar = moment(previousAction.date).calendar();
-			return item;
-		};
-		card.actions.sort(function(a, b) { 
-		    return moment(b.date).isBefore(a.date);
-		});
-		var previousAction = null;
-		for(var _a=0; _a<card.actions.length; _a++) {
-			var action = card.actions[_a];
-			if(previousAction) {
-				var timeRangeItem = buildTimeRangeItem(card.id, previousAction, action.date);
-				card.timeline.push(timeRangeItem);
-				model.timeline.data.push(timeRangeItem);
-			}
-			previousAction = action;
-		}
-		if(previousAction) {
-			var timeRangeItem = buildTimeRangeItem(card.id, previousAction, moment().toDate());
-			card.timeline.push(timeRangeItem);
-			model.timeline.data.push(timeRangeItem);
-		}
-
-		// build progressBar from actions
-		// var buildProgressBarItem = function(timeRangeItem, startEndRange) {
-		// 	var duration = timeRangeItem.end-timeRangeItem.start;
-		// 	var item = {
-		// 		state: setStateType(timeRangeItem.content), 
-		// 		value: duration/startEndRange*100,
-		// 		duration: moment.duration(duration, "milliseconds").humanize(),
-		// 		name: timeRangeItem.content
-		// 	}
-		// 	return item;
-		// };
-		// card.progressBar = [];
-		// var progressBarMin = null;
-		// var progressBarMax = null;
-		// for(var _t in card.timeline) {
-		// 	var item = card.timeline[_t];
-		// 	if(!progressBarMin) progressBarMin = item.start;
-		// 	else if(item.start < progressBarMin) progressBarMin = item.start;
-		// 	if(!progressBarMax) progressBarMax = item.end;
-		// 	else if(item.end > progressBarMax) progressBarMax = item.end;
-		// }
-		// var startEndRange = progressBarMax - progressBarMin;
-		// for(var _t in card.timeline) {
-		// 	var item = card.timeline[_t];
-		// 	card.progressBar.push(buildProgressBarItem(item, startEndRange));
-		// }
-
-		// build timeline from schedule
-		for(var _s in card.schedule) {
-			var s = card.schedule[_s];
-			if(s.type == 'duration') continue;
-			var timelineItem = {
-				state: setStateType(s.name), 
-				content: s.name,
-				type: 'point', 
-				group: card.id, 
-				start: s.date.startOf('day').toDate()
-			};
-			card.timeline.push(timelineItem);
-			model.timeline.data.push(timelineItem);
-		}
-
-		// build timeline from due date
-		if(card.due) {
-			var timelineItem = {
-				state: 'done',
-				content: 'Due',
-				type: 'point', 
-				group: card.id, 
-				start: moment(card.due).startOf('day').toDate()
-			};
-			card.timeline.push(timelineItem);
-			model.timeline.data.push(timelineItem);
-		}
+		buildTimelineGroup(card, model.timeline.groups);
+		buldTimelineFromActions(card, model.timeline.data);
+		buildTimelineFromSchedule(card, model.timeline.data, ['duration'], false, 'point');
+		buildTimelineFromDue(card, model.timeline.data);
 	}
 }
 
 
+/*----------------------------------------------------------------------------------------------------*/
+function buildTimelineGroup(card, timelineGroups) {
+	var groupDisplayName = (card.name.length>30) ? card.name.substring(0,30)+".." : card.name;
+	timelineGroups.push({
+		id: card.id,
+		content: '<a href="'+card.url+'" target="_blank">'+groupDisplayName+'</a>',
+		title: card.name,
+		order: getStateOrder(card.state) + "-" + card.due
+	});
+}
+/*----------------------------------------------------------------------------------------------------*/
+function buldTimelineFromActions(card, timelineData) {
+	card.actions.sort(function(a, b) { 
+	    return moment(b.date).isBefore(a.date);
+	});
+	var previousAction = null;
+	for(var _a=0; _a<card.actions.length; _a++) {
+		var action = card.actions[_a];
+		if(previousAction) {
+			var timeRangeItem = buildTimeRangeItem(card.id, previousAction, action.date);
+			timelineData.push(timeRangeItem);
+		}
+		previousAction = action;
+	}
+	if(previousAction) {
+		var timeRangeItem = buildTimeRangeItem(card.id, previousAction, moment().toDate());
+		timelineData(timeRangeItem);
+	}
+}
+/*----------------------------------------------------------------------------------------------------*/
+function buildTimelineFromSchedule(card, timelineData, filters, filterTypeAllow, type) {
+	for(var _s in card.schedule.dates) {
+		var s = card.schedule.dates[_s];
+		var ignore = filterTypeAllow;
+		for(_f in filters) {
+			if(s.type == filters[_f]) {
+				!ignore;
+				break;
+			}
+		}
+		if(ignore) continue;
+		var timelineItem = {
+			state: setStateType(s.name), 
+			content: s.name,
+			type: type, 
+			group: card.id, 
+			start: s.date.startOf('day').toDate()
+		};
+		timelineData.push(timelineItem);
+	}
+}
+/*----------------------------------------------------------------------------------------------------*/
+function buildTimelineFromDue(card, timelineData) {
+	if(card.due) {
+		var timelineItem = {
+			state: 'done',
+			content: 'Due',
+			type: 'point', 
+			group: card.id, 
+			start: moment(card.due).startOf('day').toDate()
+		};
+		timelineData.push(timelineItem);
+	}
+}
 /*----------------------------------------------------------------------------------------------------*/
 function setStateType(_s) {
 	var str = _s.toLowerCase();
@@ -347,3 +345,19 @@ function getStateOrder(_s) {
 	else if(_s=='done') return 0
 	else return 0;
 }
+function buildTimeRangeItem(cardId, previousAction, endDate) {
+	var item = {
+		type: 'range', 
+		group: cardId, 
+		start: moment(previousAction.date).toDate(),
+		end: moment(endDate).toDate()
+	}
+	if(previousAction.type == "createCard") item.content = previousAction.data.list.name;
+	else if(previousAction.type == "updateCard") item.content = previousAction.data.listAfter.name;
+	else if(previousAction.type == "moveCardToBoard") item.content = previousAction.data.list.name; 
+	else if(previousAction.type == "moveCardFromBoard") item.content = previousAction.data.boardTarget.name;
+	item.className = setStateType(item.content);
+	item.duration = moment.duration((item.end-item.start), "milliseconds").humanize();
+	item.calendar = moment(previousAction.date).calendar();
+	return item;
+};
